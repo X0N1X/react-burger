@@ -52,7 +52,9 @@ class BurgerConstructor extends React.Component {
 						<ul className="p-3" key = {index} style={{
 								columnCount: 2,
 								display: this.state.currentTab === 'all' || this.state.currentTab === group.name ? 'block' : 'none'}}>
-							{group.text}
+							<span style={{display: this.state.currentTab === group.name ? 'none' : 'block'}}>
+								{group.text}
+							</span>
 							{group.children.map((item) => (
 								<li>
 									<img src={item.image} alt={item.name}/>
