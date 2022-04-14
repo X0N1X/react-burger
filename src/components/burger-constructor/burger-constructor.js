@@ -49,7 +49,9 @@ class BurgerConstructor extends React.Component {
 				</header>
 				<section>
 					{this.props.store.map((group, index) => (
-						<ul className="p-3" key = {index} style={{columnCount:2}}>
+						<ul className="p-3" key = {index} style={{
+								columnCount: 2,
+								display: this.state.currentTab === 'all' || this.state.currentTab === group.name ? 'block' : 'none'}}>
 							{group.text}
 							{group.children.map((item) => (
 								<li>
