@@ -1,49 +1,34 @@
 import React from 'react';
-import { Logo, Tab, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Logo, Button, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import HeaderButton from '../header-button/header-button';
+import styles from './app-header.module.css';
+
 
 class AppHeader extends React.Component {
 	constructor(props) {
 		super(props);
 	};
 
-	handleChangeTab = (value) => {
-		this.props.onChangeTab(value);
-	};
-
 	render() {
+
 		return (
-			<header style={{ display: 'flex' }}>
-				<Tab
-					value   = "constructor"
-					active  = {this.props.currentTab === 'constructor'}
-					onClick = {this.handleChangeTab}
-				>
-					<BurgerIcon type="primary" />
-					<span className="p-3">
-						Конструктор
-					</span>
-				</Tab>
-				<Tab
-					value   = "orders"
-					active  = {this.props.currentTab === 'orders'}
-					onClick = {this.handleChangeTab}
-				>
-					<ListIcon type="primary" />
-					<span className="p-3">
-						Лента заказов
-					</span>
-				</Tab>
+			<header className={styles.header}>
+				<HeaderButton
+					icon       = {<BurgerIcon type={this.props.currentTab === 'constructor'?'primary':'secondary'}/>}
+					tabName    = 'constructor'
+					tabText    = 'Конструктор'
+					currentTab = {this.props.currentTab}/>
+				<HeaderButton
+					icon       = {<ListIcon type={this.props.currentTab === 'orders'?'primary':'secondary'}/>}
+					tabName    = 'orders'
+					tabText    = 'Лента заказов'
+					currentTab = {this.props.currentTab}/>
 				<Logo />
-				<Tab
-					value   = "profile"
-					active  = {this.props.currentTab === 'profile'}
-					onClick = {this.handleChangeTab}
-				>
-					<ProfileIcon type="primary" />
-					<span className="p-3">
-						Личный кабинет
-					</span>
-				</Tab>
+				<HeaderButton
+					icon       = {<ProfileIcon type={this.props.currentTab === 'profile'?'primary':'secondary'}/>}
+					tabName    = 'profile'
+					tabText    = 'Личный кабинет'
+					currentTab = {this.props.currentTab}/>
 			</header>
 		)
 	};

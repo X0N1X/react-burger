@@ -1,9 +1,10 @@
 import React from 'react';
-import './App.css';
+import styles from './App.module.css';
 import AppHeader from './components/app-header/app-header';
-import BurgerConstructor from './components/burger-constructor/burger-constructor';
+//import BurgerConstructor from './components/burger-constructor/burger-constructor';
+import BurgerIngredients from './components/burger-ingredients/burger-ingredients';
 import store from './utils/data';
-import {isSwitchStatement} from "@babel/types";
+import BurgerConstructor from "./components/burger-constructor/burger-constructor";
 
 
 class App extends React.Component {
@@ -50,10 +51,11 @@ class App extends React.Component {
             currentTab={this.state.currentTab}
             onChangeTab={this.changeTab}
         />
-        <section className="p-3" style={{display: this.state.currentTab === 'constructor' ? 'block' : 'none'}}>
-            <BurgerConstructor store={this.state.store}/>
+        <section className={this.state.currentTab === 'constructor' ? styles.section : styles.hidden_section}>
+            <BurgerIngredients store={this.state.store}/>
+            <BurgerConstructor />
         </section>
-        <section className="p-3" style={{display: this.state.currentTab === 'orders' ? 'block' : 'none'}}>
+        <section className="p-3" style={{'flexDirection': 'row', display: this.state.currentTab === 'orders' ? 'block' : 'none'}}>
           Лента заказов
         </section>
         <section className="p-3" style={{display: this.state.currentTab === 'profile' ? 'block' : 'none'}}>

@@ -1,0 +1,11 @@
+.section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hidden_section {
+  display:none;
+}

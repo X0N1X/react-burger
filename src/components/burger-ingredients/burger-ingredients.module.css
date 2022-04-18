@@ -1,0 +1,21 @@
+
+.section {
+	overflow-y: scroll;
+	height:     calc(100vh - 144px);
+	width:      inherit;
+	position:   absolute;
+}
+
+.section::-webkit-scrollbar {
+	width: 12px;
+}
+
+.section::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+
+.section::-webkit-scrollbar-thumb {
+	background: #5858AD;
+	border:     3px solid #8585AD;
+	box-sizing: border-box;
+}

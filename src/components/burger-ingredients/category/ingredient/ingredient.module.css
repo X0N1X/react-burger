@@ -1,0 +1,26 @@
+.ingredient {
+	list-style-type: none;
+	display:         flex;
+	flex-direction:  column;
+	flex-wrap:       nowrap;
+	align-items:     center;
+	width:           272px;
+}
+
+.image {
+	margin-bottom: 4px;
+}
+
+.price {
+	margin-bottom: 4px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+
+}
+.description {
+
+}
