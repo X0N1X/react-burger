@@ -1,23 +1,32 @@
 import React from 'react';
-import { Tab, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import ItemsList from './items-list/items-list'
+import styles from './burger-constructor.module.css'
 
 class BurgerConstructor extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			currentTab: 'all'
-		}
 	}
-
-	handleChangeTab = (tab) => {this.setState(oldState => ({...oldState, currentTab:tab}))};
 
 	render() {
 
-
 		return (
-			<div style={{width:600, marginLeft:40}}>
-
+			<div style = {{width:600, marginTop:100}}>
+				<ItemsList
+					bun         = {this.props.currentBurger.bun}
+					ingredients = {this.props.currentBurger.ingredients}
+				/>
+				<div className = {styles.total}>
+					<div className = {styles.price}>
+						<p className = "text text_type_digits-medium" style = {{marginRight:'8px'}}>
+							{this.props.currentBurger.total}
+						</p>
+						<CurrencyIcon type = "primary"/>
+					</div>
+					<Button type = "primary" size = "large">
+						Оформить заказ
+					</Button>
+				</div>
 			</div>
 		)
 	}

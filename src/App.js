@@ -37,7 +37,20 @@ class App extends React.Component {
 
     this.state = {
       store:      groups,
-      currentTab: 'constructor'
+      currentTab: 'constructor',
+      currentBurger: {
+        bun: store.find((item=>item._id === '60666c42cc7b410027a1a9b1')),
+        ingredients: [
+            store.find((item=>item._id === '60666c42cc7b410027a1a9b9')),
+            store.find((item=>item._id === '60666c42cc7b410027a1a9b4')),
+            store.find((item=>item._id === '60666c42cc7b410027a1a9bc')),
+            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
+            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
+            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
+            store.find((item=>item._id === '60666c42cc7b410027a1a9bb'))
+        ],
+        total: 610
+      }
     };
 
   };
@@ -52,8 +65,8 @@ class App extends React.Component {
             onChangeTab={this.changeTab}
         />
         <section className={this.state.currentTab === 'constructor' ? styles.section : styles.hidden_section}>
-            <BurgerIngredients store={this.state.store}/>
-            <BurgerConstructor />
+            <BurgerIngredients store={this.state.store} currentBurger={this.state.currentBurger}/>
+            <BurgerConstructor currentBurger={this.state.currentBurger}/>
         </section>
         <section className="p-3" style={{'flexDirection': 'row', display: this.state.currentTab === 'orders' ? 'block' : 'none'}}>
           Лента заказов

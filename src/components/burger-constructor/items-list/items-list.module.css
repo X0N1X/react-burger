@@ -1,0 +1,27 @@
+.list {
+	display:        flex;
+	flex-direction: column;
+	gap:            16px;
+}
+
+.items {
+	display:        flex;
+	flex-direction: column;
+	gap:            16px;
+    height:         464px;
+	overflow-y:     scroll;
+}
+
+.items::-webkit-scrollbar {
+	width: 12px;
+}
+
+.items::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+
+.items::-webkit-scrollbar-thumb {
+	background: #5858AD;
+	border:     3px solid #8585AD;
+	box-sizing: border-box;
+}

@@ -1,9 +1,9 @@
 .header {
-	display: flex;
+	display:         flex;
 	justify-content: center;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-content: stretch;
-	align-items: center;
-	height: 88px;
+	flex-direction:  row;
+	flex-wrap:       nowrap;
+	align-content:   stretch;
+	align-items:     center;
+	height:          88px;
 }

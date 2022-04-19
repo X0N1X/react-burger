@@ -12,15 +12,12 @@
 }
 
 .price {
-	margin-bottom: 4px;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-content: center;
+	margin-bottom:   4px;
+	display:         flex;
+	flex-direction:  row;
+	flex-wrap:       nowrap;
+	align-content:   center;
 	justify-content: center;
-	align-items: center;
-
-}
-.description {
+	align-items:     center;
 
 }
