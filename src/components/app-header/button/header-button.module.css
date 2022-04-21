@@ -11,6 +11,16 @@
 	vertical-align: middle;
 }
 
+.active_text {
+	composes: text;
+	color: var(--text-primary-color);
+}
+
+.inactive_text {
+	composes: text;
+	color: var(--text-inactive-color);
+}
+
 .icon {
 	margin-left:    20px;
 	margin-right:   8px;

@@ -2,6 +2,7 @@ import React from 'react';
 import {Logo, BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import HeaderButton from './button/header-button';
 import styles from './app-header.module.css';
+import PropTypes from 'prop-types';
 
 
 class AppHeader extends React.Component {
@@ -33,5 +34,9 @@ class AppHeader extends React.Component {
 		)
 	};
 }
+
+AppHeader.propTypes = {
+	currentTab: PropTypes.string.isRequired
+};
 
 export default AppHeader;

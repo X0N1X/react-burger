@@ -1,11 +1,9 @@
 import React from 'react';
-import styles from './App.module.css';
-import AppHeader from './components/app-header/app-header';
-//import BurgerConstructor from './components/burger-constructor/burger-constructor';
-import BurgerIngredients from './components/burger-ingredients/burger-ingredients';
-import store from './utils/data';
-import BurgerConstructor from "./components/burger-constructor/burger-constructor";
-
+import styles from './app.module.css';
+import AppHeader from '../../components/app-header/app-header';
+import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
+import store from '../../utils/data';
+import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 
 class App extends React.Component {
   constructor(props) {
@@ -64,14 +62,14 @@ class App extends React.Component {
             currentTab={this.state.currentTab}
             onChangeTab={this.changeTab}
         />
-        <section className={this.state.currentTab === 'constructor' ? styles.section : styles.hidden_section}>
+        <section className={this.state.currentTab === 'constructor' ? styles.constructor : styles.hidden_section}>
             <BurgerIngredients store={this.state.store} currentBurger={this.state.currentBurger}/>
             <BurgerConstructor currentBurger={this.state.currentBurger}/>
         </section>
-        <section className="p-3" style={{'flexDirection': 'row', display: this.state.currentTab === 'orders' ? 'block' : 'none'}}>
+        <section className={this.state.currentTab === 'orders' ? styles.orders : styles.hidden_section}>
           Лента заказов
         </section>
-        <section className="p-3" style={{display: this.state.currentTab === 'profile' ? 'block' : 'none'}}>
+        <section className={this.state.currentTab === 'profile' ? styles.profile : styles.hidden_section}>
           Личный кабинет
         </section>
       </div>

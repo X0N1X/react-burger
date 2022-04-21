@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import ItemsList from './items-list/items-list'
 import styles from './burger-constructor.module.css'
+import {burger} from "../../types/types";
 
 class BurgerConstructor extends React.Component {
 	constructor(props) {
@@ -31,5 +32,9 @@ class BurgerConstructor extends React.Component {
 		)
 	}
 }
+
+BurgerConstructor.propTypes = {
+	currentBurger: burger.isRequired
+};
 
 export default BurgerConstructor

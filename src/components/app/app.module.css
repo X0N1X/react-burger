@@ -1,10 +1,18 @@
-.section {
+.constructor {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: flex-start;
   column-gap: 40px;
+}
+
+.orders {
+  display: block;
+}
+
+.profile {
+  display: block;
 }
 
 .hidden_section {

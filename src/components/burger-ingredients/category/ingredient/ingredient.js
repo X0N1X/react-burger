@@ -1,6 +1,7 @@
 import React from 'react';
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './ingredient.module.css';
+import {ingredient} from "../../../../types/types";
 
 
 class Ingredient extends React.Component {
@@ -23,4 +24,9 @@ class Ingredient extends React.Component {
 		);
 	}
 }
+
+Ingredient.propTypes = {
+	item: ingredient.isRequired
+};
+
 export default Ingredient;

@@ -2,6 +2,8 @@ import React from 'react';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import Category from './category/category'
 import styles from './burger-ingredients.module.css';
+import {group} from "../../types/types";
+import * as PropTypes from 'prop-types';
 
 class BurgerIngredients extends React.Component {
 	constructor(props) {
@@ -58,4 +60,9 @@ class BurgerIngredients extends React.Component {
 		)
 	}
 }
+
+BurgerIngredients.propTypes = {
+	store: PropTypes.arrayOf(group).isRequired
+};
+
 export default BurgerIngredients;

@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from "./button.module.css";
+import styles from "./header-button.module.css";
+
 
 class HeaderButton extends React.Component {
 	constructor(props) {
@@ -14,9 +16,8 @@ class HeaderButton extends React.Component {
 					<div className = {styles.icon}>
 						{this.props.icon}
 					</div>
-					<span className = {styles.text}
-						  style     = {{color: (this.props.currentTab === this.props.tabName ?
-								  		'var(--text-primary-color)' : 'var(--text-inactive-color)')}}>
+					<span className = {this.props.currentTab === this.props.tabName ?
+							styles.active_text : styles.inactive_text}>
 						{this.props.tabText}
 					</span>
 				</Button>
@@ -24,5 +25,11 @@ class HeaderButton extends React.Component {
 		)
 	}
 }
+
+HeaderButton.propTypes = {
+	icon:    PropTypes.element.isRequired,
+	tabName: PropTypes.string.isRequired,
+	tabText: PropTypes.string.isRequired
+};
 
 export default HeaderButton;

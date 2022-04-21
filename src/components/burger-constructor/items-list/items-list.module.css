@@ -25,3 +25,11 @@
 	border:     3px solid #8585AD;
 	box-sizing: border-box;
 }
+
+.item {
+	display:        flex;
+	flex-direction: row;
+	flex-wrap:      nowrap;
+	align-content:  center;
+	align-items:    center;
+}
