@@ -19,3 +19,18 @@
 	border:     3px solid #8585AD;
 	box-sizing: border-box;
 }
+
+.panel {
+	width:  600px;
+	height: calc(100vh - 88px);
+}
+
+.header {
+	display:        flex;
+	padding-bottom: 40px;
+}
+
+.title {
+	margin-top:    40px;
+	margin-bottom: 20px;
+}

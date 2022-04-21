@@ -10,16 +10,16 @@ class BurgerConstructor extends React.Component {
 	}
 
 	render() {
-
+		const cls = 'text text_type_digits-medium ' + styles.price_text;
 		return (
-			<div style = {{width:600, marginTop:100}}>
+			<div className={styles.panel}>
 				<ItemsList
 					bun         = {this.props.currentBurger.bun}
 					ingredients = {this.props.currentBurger.ingredients}
 				/>
 				<div className = {styles.total}>
 					<div className = {styles.price}>
-						<p className = "text text_type_digits-medium" style = {{marginRight:'8px'}}>
+						<p className = {cls}>
 							{this.props.currentBurger.total}
 						</p>
 						<CurrencyIcon type = "primary"/>

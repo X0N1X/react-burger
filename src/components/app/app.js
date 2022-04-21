@@ -57,7 +57,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{height:'100%', width:'100%'}}>
+      <div className={styles.app}>
         <AppHeader
             currentTab={this.state.currentTab}
             onChangeTab={this.changeTab}

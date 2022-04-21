@@ -18,13 +18,14 @@ class BurgerIngredients extends React.Component {
 
 	render() {
 
+		const titleCls = 'text text_type_main-large ' + styles.title;
 
 		return (
-			<div style = {{width:600, height:'calc(100vh-88px)'}}>
-				<p className = "text text_type_main-large" style = {{marginTop:40, marginBottom:20}}>
+			<div className={styles.panel}>
+				<p className = {titleCls}>
 					Собирите бургер
 				</p>
-				<header style = {{display:'flex', paddingBottom:40}}>
+				<header className={styles.header}>
 					<Tab
 						value   = "bun"
 						active  = {this.state.currentTab === 'bun'}
