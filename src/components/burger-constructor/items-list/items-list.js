@@ -13,7 +13,7 @@ class ItemsList extends React.Component {
 	render() {
 		return (
 			<div className = {styles.list}>
-				<div style={{marginLeft:32}}>
+				<div className={styles.bun_container}>
 					<ConstructorElement
 						type      = "top"
 						isLocked  = {true}
@@ -25,7 +25,7 @@ class ItemsList extends React.Component {
 				<div className = {styles.items}>
 					{this.props.ingredients.map((item, index) => (
 						<div key={index} className={styles.item}>
-							<div style={{width:32}}>
+							<div className={styles.icon_container}>
 								<DragIcon type = 'primary'/>
 							</div>
 							<ConstructorElement
@@ -36,7 +36,7 @@ class ItemsList extends React.Component {
 						</div>
 					))}
 				</div>
-				<div style={{marginLeft:32}}>
+				<div className={styles.bun_container}>
 					<ConstructorElement
 						type      = "bottom"
 						isLocked  = {true}
