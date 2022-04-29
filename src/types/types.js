@@ -1,4 +1,4 @@
-import {shape, number, string, arrayOf} from 'prop-types';
+import { shape, number, string, arrayOf } from 'prop-types';
 
 /**
  * Определение типа данных "ингредиент"

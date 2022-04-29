@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React  from 'react';
-import {CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './modal.module.css'
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import PropTypes from 'prop-types';
@@ -11,16 +11,16 @@ const Modal = (props) => {
 
 		  headerCls = props.title ? styles.header_with_title : styles.header_wo_title,
 
-		  maybeClose = (event) => {
+		  closeByEsc = (event) => {
 			  if (event.key === "Escape") {
 				  props.onClickClose();
 			  }
 		  };
 
 	React.useEffect(() => {
-		document.addEventListener('keydown', maybeClose);
+		document.addEventListener('keydown', closeByEsc);
 		return () => {
-			document.removeEventListener('keydown', maybeClose);
+			document.removeEventListener('keydown', closeByEsc);
 		}
 	});
 

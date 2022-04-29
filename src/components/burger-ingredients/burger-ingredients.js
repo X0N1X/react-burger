@@ -1,8 +1,8 @@
 import React from 'react';
-import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Category from './category/category'
 import styles from './burger-ingredients.module.css';
-import {group} from "../../types/types";
+import { group } from "../../types/types";
 import * as PropTypes from 'prop-types';
 
 const BurgerIngredients = (props) => {

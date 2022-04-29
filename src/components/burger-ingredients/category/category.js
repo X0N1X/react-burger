@@ -1,7 +1,7 @@
 import React from 'react';
 import Ingredient from './ingredient/ingredient'
 import styles from './category.module.css';
-import {group} from "../../../types/types";
+import { group } from "../../../types/types";
 
 
 const Category = (props) => {

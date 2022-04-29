@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ItemsList from './items-list/items-list'
 import styles from './burger-constructor.module.css'
-import {burger} from "../../types/types";
+import { burger } from "../../types/types";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 
@@ -30,14 +30,14 @@ const BurgerConstructor = props => {
 				bun={props.currentBurger.bun}
 				ingredients={props.currentBurger.ingredients}
 			/>
-			<div className={styles.total} onClick={openWin}>
+			<div className={styles.total}>
 				<div className={styles.price}>
 					<p className={cls}>
 						{props.currentBurger.total}
 					</p>
 					<CurrencyIcon type="primary"/>
 				</div>
-				<Button type="primary" size="large">
+				<Button type="primary" size="large" onClick={openWin}>
 					Оформить заказ
 				</Button>
 			</div>

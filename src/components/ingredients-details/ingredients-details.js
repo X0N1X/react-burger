@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ingredients-details.module.css';
-import {ingredient} from "../../types/types";
+import { ingredient } from "../../types/types";
 
 const IngredientDetails = (props) => {
 	const digitsCls = 'text text_type_digits-default text_color_inactive',

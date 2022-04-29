@@ -17,9 +17,10 @@ export default function App() {
 	});
 
 	const getTotal = burger => {
-		let total = burger.bun.price * 2;
-		burger.ingredients.forEach((item)=>{total += item.price});
-		return total;
+		return burger.ingredients.reduce(
+			(prevValue, currentValue) => prevValue + currentValue.price,
+			burger.bun.price * 2
+		);
 	};
 
 	const getTmpBurger = store => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './ingredient.module.css';
-import {ingredient} from "../../../../types/types";
+import { ingredient } from "../../../../types/types";
 import Modal from "../../../modal/modal"
 import IngredientDetails from "../../../ingredients-details/ingredients-details"
 

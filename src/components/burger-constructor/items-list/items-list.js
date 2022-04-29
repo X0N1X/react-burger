@@ -1,8 +1,8 @@
 import React from 'react';
-import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './items-list.module.css'
 import PropTypes from "prop-types";
-import {ingredient} from "../../../types/types";
+import { ingredient } from "../../../types/types";
 
 
 const ItemsList = (props) => {
