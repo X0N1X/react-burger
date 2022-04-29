@@ -6,8 +6,7 @@ import BurgerConstructor from "../../components/burger-constructor/burger-constr
 
 export default function App() {
 
-	//const url = 'https://norma.nomoreparties.space/api/ingredients';	//этот URL часто отваливается по таймауту
-	const url = 'https://api.codetabs.com/v1/proxy/?quest=https://fr.upravdom.duckdns.org/wl/?id=fNTuij9V6KeE1A0sa4ndGSpxFdg0s0iq&fmode=open';
+	const url = 'https://norma.nomoreparties.space/api/ingredients';
 
 	const [state, setState] = React.useState({
 		store:         [],
