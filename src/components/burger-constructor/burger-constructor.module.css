@@ -1,0 +1,25 @@
+.price {
+	display:        flex;
+	flex-direction: row;
+	flex-wrap:      nowrap;
+	align-items:    center;
+}
+
+.total {
+	display:            flex;
+	flex-direction:     row;
+	flex-wrap:          nowrap;
+	justify-content:    flex-end;
+	align-items:        center;
+	margin-block-start: 40px;
+	gap:                40px;
+}
+
+.panel {
+	width:      600px;
+	margin-top: 100px;
+}
+
+.price_text {
+	margin-right: 8px;
+}

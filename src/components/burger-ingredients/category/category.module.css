@@ -1,0 +1,18 @@
+.title {
+	font-style:  normal;
+	font-weight: 700;
+	font-size:   24px;
+	line-height: 30px;
+}
+.list {
+	display:              flex;
+	align-items:          flex-start;
+	flex-wrap:            wrap;
+	justify-content:      flex-start;
+	align-content:        center;
+	padding-inline-start: 16px;
+	column-gap:           24px;
+	row-gap:              32px;
+	margin-block-start:   24px;
+	margin-block-end:     40px;
+}
