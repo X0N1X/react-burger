@@ -2,79 +2,87 @@ import React from 'react';
 import styles from './app.module.css';
 import AppHeader from '../../components/app-header/app-header';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
-import store from '../../utils/data';
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+export default function App() {
 
-      const groups = [];
+	//const url = 'https://norma.nomoreparties.space/api/ingredients';	//этот URL часто отваливается по таймауту
+	const url = 'https://api.codetabs.com/v1/proxy/?quest=https://fr.upravdom.duckdns.org/wl/?id=fNTuij9V6KeE1A0sa4ndGSpxFdg0s0iq&fmode=open';
 
-      store.forEach(item => {
-          const index = groups.findIndex(group => group.name === item.type);
+	const [state, setState] = React.useState({
+		store:         [],
+		loading:       false,
+		currentTab:     'constructor',
+		currentBurger: null
+	});
 
-          if (index >= 0) {
-              groups[index].children.push(item);
+	const getGroups = store => {
+		const groups = [];
 
-          } else {
-              let text = '';
-              switch (item.type) {
-                  case 'bun':   text = 'Булки';   break;
-                  case 'sauce': text = 'Булки';   break;
-                  case 'main':  text = 'Начинки'; break;
-              }
+		store.forEach(item => {
+			const index = groups.findIndex(group => group.name === item.type);
 
-              groups.push({
-                  name:     item.type,
-                  text:     text,
-                  children: [item]
-              });
-          }
-      });
+			if (index >= 0) {
+				groups[index].children.push(item);
 
-    this.state = {
-      store:      groups,
-      currentTab: 'constructor',
-      currentBurger: {
-        bun: store.find((item=>item._id === '60666c42cc7b410027a1a9b1')),
-        ingredients: [
-            store.find((item=>item._id === '60666c42cc7b410027a1a9b9')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9b4')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bc')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bb'))
-        ],
-        total: 610
-      }
-    };
+			} else {
+				let text = '';
+				switch (item.type) {
+					case 'bun':
+						text = 'Булки';
+						break;
+					case 'sauce':
+						text = 'Булки';
+						break;
+					case 'main':
+						text = 'Начинки';
+						break;
+				}
 
-  };
+				groups.push({
+					name:     item.type,
+					text:     text,
+					children: [item]
+				});
+			}
+		});
+		return groups;
+	};
 
-  changeTab = (tab) => this.setState(oldState => ({...oldState, currentTab: tab}));
+	React.useEffect(() => {
+		const getIngredients = async() => {
+			setState({...state, loading: true});
+			try {
+				const res  = await fetch(url);
+				const data = await res.json();
+				if (data.success) {
+					setState({...state, store: getGroups(data.data)});
+				}
+			} catch (error) {
+				console.log('Возникла проблема с fetch запросом: ', error.message);
+			}
+		};
+		getIngredients();
+	}, []);
 
-  render() {
-    return (
-      <div className={styles.app}>
-        <AppHeader
-            currentTab={this.state.currentTab}
-            onChangeTab={this.changeTab}
-        />
-        <section className={this.state.currentTab === 'constructor' ? styles.constructor : styles.hidden_section}>
-            <BurgerIngredients store={this.state.store} currentBurger={this.state.currentBurger}/>
-            <BurgerConstructor currentBurger={this.state.currentBurger}/>
-        </section>
-        <section className={this.state.currentTab === 'orders' ? styles.orders : styles.hidden_section}>
-          Лента заказов
-        </section>
-        <section className={this.state.currentTab === 'profile' ? styles.profile : styles.hidden_section}>
-          Личный кабинет
-        </section>
-      </div>
-    );
-  };
+	const changeTab = (tab) => setState(oldState => ({...oldState, currentTab: tab}));
+
+	return (
+		<div className={styles.app}>
+			<AppHeader
+				currentTab={state.currentTab}
+				onChangeTab={changeTab}
+			/>
+			<section className={state.currentTab === 'constructor' ? styles.constructor : styles.hidden_section}>
+				<BurgerIngredients store={state.store} currentBurger={state.currentBurger}/>
+				<BurgerConstructor currentBurger={state.currentBurger}/>
+			</section>
+			<section className={state.currentTab === 'orders' ? styles.orders : styles.hidden_section}>
+				Лента заказов
+			</section>
+			<section className={state.currentTab === 'profile' ? styles.profile : styles.hidden_section}>
+				Личный кабинет
+			</section>
+		</div>
+	);
 }
-
-export default App;

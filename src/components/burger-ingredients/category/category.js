@@ -4,26 +4,21 @@ import styles from './category.module.css';
 import {group} from "../../../types/types";
 
 
-class Category extends React.Component {
-	constructor(props) {
-		super(props);
-	};
+const Category = (props) => {
+	return (
+		<>
+			<span className = {styles.title}>
+					{props.group.text}
+			</span>
+			<ul className = {styles.list}>
+				{props.group.children.map((item) => (
+					<Ingredient key = {item._id} item = {item}/>
+				))}
+			</ul>
+		</>
+	);
 
-	render() {
-		return (
-			<>
-				<span className = {styles.title}>
-						{this.props.group.text}
-				</span>
-				<ul className = {styles.list}>
-					{this.props.group.children.map((item) => (
-						<Ingredient key = {item._id} item = {item}/>
-					))}
-				</ul>
-			</>
-		);
-	}
-}
+};
 
 Category.propTypes = {
 	group: group
