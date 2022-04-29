@@ -1,0 +1,23 @@
+.panel {
+    display:            flex;
+    flex-direction:     column;
+    justify-content:    center;
+    align-items:        center;
+    margin-block-start: 36px;
+    gap:                8px;
+}
+
+
+.image {
+    margin-block-start: 52px;
+    margin-block-end:   52px;
+}
+
+.image svg {
+    width:  120px;
+    height: 120px;
+}
+
+.id_text {
+    margin-block-start: 24px;
+}

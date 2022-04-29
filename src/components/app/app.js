@@ -12,9 +12,32 @@ export default function App() {
 	const [state, setState] = React.useState({
 		store:         [],
 		loading:       false,
+		hasError:      false,
 		currentTab:     'constructor',
 		currentBurger: null
 	});
+
+	const getTotal = burger => {
+		let total = burger.bun.price * 2;
+		burger.ingredients.forEach((item)=>{total += item.price});
+		return total;
+	};
+
+	const getTmpBurger = store => {
+		const burger = {
+			bun: store.find((item=>item._id === '60d3b41abdacab0026a733c6')),
+			ingredients: [
+				store.find((item=>item._id === '60d3b41abdacab0026a733c8')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733c9')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733cb')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733cc')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733d1')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733d3'))
+			]
+		};
+		burger.total = getTotal(burger);
+		return burger;
+	};
 
 	const getGroups = store => {
 		const groups = [];
@@ -50,32 +73,38 @@ export default function App() {
 	};
 
 	React.useEffect(() => {
-		const getIngredients = async() => {
+		const getIngredients = () => {
 			setState({...state, loading: true});
-			try {
-				const res  = await fetch(url);
-				const data = await res.json();
-				if (data.success) {
-					setState({...state, store: getGroups(data.data)});
+			fetch(url).then((response) => {
+				return response.ok ? response.json() : Promise.reject(response.status);
+			}).then((result) => {
+				if (result && result.success) {
+					const burger = getTmpBurger(result.data);
+					setState({...state, store:getGroups(result.data), currentBurger:burger});
+				} else {
+					setState({...state, hasError:true, isLoading:false});
 				}
-			} catch (error) {
-				console.log('Возникла проблема с fetch запросом: ', error.message);
-			}
+			}).catch((e) => {
+				setState({ ...state, hasError: true, isLoading: false })
+			});
 		};
 		getIngredients();
 	}, []);
-
-	const changeTab = (tab) => setState(oldState => ({...oldState, currentTab: tab}));
 
 	return (
 		<div className={styles.app}>
 			<AppHeader
 				currentTab={state.currentTab}
-				onChangeTab={changeTab}
 			/>
 			<section className={state.currentTab === 'constructor' ? styles.constructor : styles.hidden_section}>
-				<BurgerIngredients store={state.store} currentBurger={state.currentBurger}/>
-				<BurgerConstructor currentBurger={state.currentBurger}/>
+				{!state.hasError ? (
+					<>
+						<BurgerIngredients store={state.store} currentBurger={state.currentBurger}/>
+						<BurgerConstructor currentBurger={state.currentBurger}/>
+					</>
+				):(
+					<h1>Ошибка чтения ингредиентов</h1>
+				)}
 			</section>
 			<section className={state.currentTab === 'orders' ? styles.orders : styles.hidden_section}>
 				Лента заказов
