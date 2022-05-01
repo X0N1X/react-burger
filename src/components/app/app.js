@@ -2,79 +2,116 @@ import React from 'react';
 import styles from './app.module.css';
 import AppHeader from '../../components/app-header/app-header';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
-import store from '../../utils/data';
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+export default function App() {
 
-      const groups = [];
+	const url = 'https://norma.nomoreparties.space/api/ingredients';
 
-      store.forEach(item => {
-          const index = groups.findIndex(group => group.name === item.type);
+	const [state, setState] = React.useState({
+		store:         [],
+		loading:       false,
+		hasError:      false,
+		currentTab:     'constructor',
+		currentBurger: null
+	});
 
-          if (index >= 0) {
-              groups[index].children.push(item);
+	const getTotal = burger => {
+		return burger.ingredients.reduce(
+			(prevValue, currentValue) => prevValue + currentValue.price,
+			burger.bun.price * 2
+		);
+	};
 
-          } else {
-              let text = '';
-              switch (item.type) {
-                  case 'bun':   text = 'Булки';   break;
-                  case 'sauce': text = 'Булки';   break;
-                  case 'main':  text = 'Начинки'; break;
-              }
+	const getTmpBurger = store => {
+		const burger = {
+			bun: store.find((item=>item._id === '60d3b41abdacab0026a733c6')),
+			ingredients: [
+				store.find((item=>item._id === '60d3b41abdacab0026a733c8')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733c9')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733cb')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733cc')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733d1')),
+				store.find((item=>item._id === '60d3b41abdacab0026a733d3'))
+			]
+		};
+		burger.total = getTotal(burger);
+		return burger;
+	};
 
-              groups.push({
-                  name:     item.type,
-                  text:     text,
-                  children: [item]
-              });
-          }
-      });
+	const getGroups = store => {
+		const groups = [];
 
-    this.state = {
-      store:      groups,
-      currentTab: 'constructor',
-      currentBurger: {
-        bun: store.find((item=>item._id === '60666c42cc7b410027a1a9b1')),
-        ingredients: [
-            store.find((item=>item._id === '60666c42cc7b410027a1a9b9')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9b4')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bc')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bb')),
-            store.find((item=>item._id === '60666c42cc7b410027a1a9bb'))
-        ],
-        total: 610
-      }
-    };
+		store.forEach(item => {
+			const index = groups.findIndex(group => group.name === item.type);
 
-  };
+			if (index >= 0) {
+				groups[index].children.push(item);
 
-  changeTab = (tab) => this.setState(oldState => ({...oldState, currentTab: tab}));
+			} else {
+				let text = '';
+				switch (item.type) {
+					case 'bun':
+						text = 'Булки';
+						break;
+					case 'sauce':
+						text = 'Булки';
+						break;
+					case 'main':
+						text = 'Начинки';
+						break;
+				}
 
-  render() {
-    return (
-      <div className={styles.app}>
-        <AppHeader
-            currentTab={this.state.currentTab}
-            onChangeTab={this.changeTab}
-        />
-        <section className={this.state.currentTab === 'constructor' ? styles.constructor : styles.hidden_section}>
-            <BurgerIngredients store={this.state.store} currentBurger={this.state.currentBurger}/>
-            <BurgerConstructor currentBurger={this.state.currentBurger}/>
-        </section>
-        <section className={this.state.currentTab === 'orders' ? styles.orders : styles.hidden_section}>
-          Лента заказов
-        </section>
-        <section className={this.state.currentTab === 'profile' ? styles.profile : styles.hidden_section}>
-          Личный кабинет
-        </section>
-      </div>
-    );
-  };
+				groups.push({
+					name:     item.type,
+					text:     text,
+					children: [item]
+				});
+			}
+		});
+		return groups;
+	};
+
+	React.useEffect(() => {
+		const getIngredients = () => {
+			setState({...state, loading: true});
+			fetch(url).then((response) => {
+				return response.ok ? response.json() : Promise.reject(response.status);
+			}).then((result) => {
+				if (result && result.success) {
+					const burger = getTmpBurger(result.data);
+					setState({...state, store:getGroups(result.data), currentBurger:burger});
+				} else {
+					setState({...state, hasError:true, isLoading:false});
+				}
+			}).catch((e) => {
+				setState({ ...state, hasError: true, isLoading: false })
+			});
+		};
+		getIngredients();
+	}, []);
+
+	return (
+		<div className={styles.app}>
+			<AppHeader
+				currentTab={state.currentTab}
+			/>
+			<section className={state.currentTab === 'constructor' ? styles.constructor : styles.hidden_section}>
+				{!state.hasError ? (
+					<>
+						<BurgerIngredients store={state.store} currentBurger={state.currentBurger}/>
+						<BurgerConstructor currentBurger={state.currentBurger}/>
+					</>
+				):(
+					<h1>Ошибка чтения ингредиентов</h1>
+				)}
+			</section>
+			<section className={state.currentTab === 'orders' ? styles.orders : styles.hidden_section}>
+				Лента заказов
+			</section>
+			<section className={state.currentTab === 'profile' ? styles.profile : styles.hidden_section}>
+				Личный кабинет
+			</section>
+		</div>
+	);
 }
-
-export default App;

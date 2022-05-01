@@ -1,0 +1,36 @@
+.window {
+	border-radius:    40px;
+	width:            720px;
+	background-color: #1C1C21;
+	align-items:      center;
+	display:          flex;
+	flex-direction:   column;
+	flex-wrap:        nowrap;
+}
+
+.window_with_title {
+	composes:       window;
+	padding:        40px;
+}
+
+.window_wo_title {
+	composes:      window;
+	padding:       60px 40px 120px 40px;
+}
+
+.header_with_title {
+	display:         flex;
+	justify-content: space-between;
+	width:           720px;
+}
+
+.header_wo_title {
+	display:         flex;
+	justify-content: flex-end;
+	width:           720px;
+}
+
+.button {
+	cursor: pointer;
+	height: 24px;
+}
