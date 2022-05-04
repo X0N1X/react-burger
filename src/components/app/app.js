@@ -3,40 +3,35 @@ import styles from './app.module.css';
 import AppHeader from '../../components/app-header/app-header';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
+import { ConstructorContext } from "../../services/constructorContext";
+import { ingredients as url } from "../../services/urls";
 
 export default function App() {
 
-	const url = 'https://norma.nomoreparties.space/api/ingredients';
-
 	const [state, setState] = React.useState({
-		store:         [],
-		loading:       false,
-		hasError:      false,
-		currentTab:     'constructor',
-		currentBurger: null
+		store:      [],
+		loading:    false,
+		hasError:   false,
+		currentTab: 'constructor'
 	});
 
-	const getTotal = burger => {
-		return burger.ingredients.reduce(
-			(prevValue, currentValue) => prevValue + currentValue.price,
-			burger.bun.price * 2
-		);
-	};
+	const [order, setOrder] = React.useState({
+		currentBurger: null,
+		number: 0
+	});
 
 	const getTmpBurger = store => {
-		const burger = {
-			bun: store.find((item=>item._id === '60d3b41abdacab0026a733c6')),
+		return {
+			bun:         store.find((item => item._id === '60d3b41abdacab0026a733c6')),
 			ingredients: [
-				store.find((item=>item._id === '60d3b41abdacab0026a733c8')),
-				store.find((item=>item._id === '60d3b41abdacab0026a733c9')),
-				store.find((item=>item._id === '60d3b41abdacab0026a733cb')),
-				store.find((item=>item._id === '60d3b41abdacab0026a733cc')),
-				store.find((item=>item._id === '60d3b41abdacab0026a733d1')),
-				store.find((item=>item._id === '60d3b41abdacab0026a733d3'))
+				store.find((item => item._id === '60d3b41abdacab0026a733c8')),
+				store.find((item => item._id === '60d3b41abdacab0026a733c9')),
+				store.find((item => item._id === '60d3b41abdacab0026a733cb')),
+				store.find((item => item._id === '60d3b41abdacab0026a733cc')),
+				store.find((item => item._id === '60d3b41abdacab0026a733d1')),
+				store.find((item => item._id === '60d3b41abdacab0026a733d3'))
 			]
 		};
-		burger.total = getTotal(burger);
-		return burger;
 	};
 
 	const getGroups = store => {
@@ -80,7 +75,8 @@ export default function App() {
 			}).then((result) => {
 				if (result && result.success) {
 					const burger = getTmpBurger(result.data);
-					setState({...state, store:getGroups(result.data), currentBurger:burger});
+					setState({...state, store:getGroups(result.data)});
+					setOrder({currentBurger:burger});
 				} else {
 					setState({...state, hasError:true, isLoading:false});
 				}
@@ -99,8 +95,10 @@ export default function App() {
 			<section className={state.currentTab === 'constructor' ? styles.constructor : styles.hidden_section}>
 				{!state.hasError ? (
 					<>
-						<BurgerIngredients store={state.store} currentBurger={state.currentBurger}/>
-						<BurgerConstructor currentBurger={state.currentBurger}/>
+						<BurgerIngredients store={state.store} />
+						<ConstructorContext.Provider value={{order, setOrder}}>
+							<BurgerConstructor />
+						</ConstructorContext.Provider>
 					</>
 				):(
 					<h1>Ошибка чтения ингредиентов</h1>

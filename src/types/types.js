@@ -26,8 +26,7 @@ export const ingredient = shape({
  */
 export const burger = shape({
 	bun:         ingredient.isRequired,
-	ingredients: arrayOf(ingredient).isRequired,
-	total:       number.isRequired
+	ingredients: arrayOf(ingredient).isRequired
 });
 
 /**
