@@ -28,7 +28,7 @@ const Modal = (props) => {
 		props.visible &&
 			<ModalOverlay onClick = {props.onClickClose}>
 				<div className = {winCls}>
-					<header className = {headerCls}>
+					<div className = {headerCls}>
 						{props.title &&
 							<p className = 'text text_type_main-medium'>
 								{props.title}
@@ -37,7 +37,7 @@ const Modal = (props) => {
 						<div className = {styles.button} onClick={props.onClickClose}>
 							<CloseIcon type="primary"/>
 						</div>
-					</header>
+					</div>
 
 					{props.children}
 				</div>

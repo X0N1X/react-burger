@@ -2,10 +2,11 @@ import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Category from './category/category'
 import styles from './burger-ingredients.module.css';
-import { group } from "../../types/types";
-import * as PropTypes from 'prop-types';
+import { BurgerContext } from "../../services/burgerContext";
 
 const BurgerIngredients = (props) => {
+
+	const {state, setState} = React.useContext(BurgerContext);
 
 	const [currentTab, setCurrentTab] = React.useState('bun');
 
@@ -42,7 +43,7 @@ const BurgerIngredients = (props) => {
 				</Tab>
 			</header>
 			<section className = {styles.section}>
-				{props.store.map((group, index) => (
+				{state.store && state.store.map((group, index) => (
 					<Category
 						group      = {group}
 						key        = {index}
@@ -52,10 +53,6 @@ const BurgerIngredients = (props) => {
 			</section>
 		</div>
 	)
-};
-
-BurgerIngredients.propTypes = {
-	store: PropTypes.arrayOf(group).isRequired
 };
 
 export default BurgerIngredients;
