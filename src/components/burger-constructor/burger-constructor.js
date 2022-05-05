@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ItemsList from './items-list/items-list'
 import styles from './burger-constructor.module.css'
-import { burger } from "../../types/types";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import { BurgerContext } from "../../services/burgerContext";
+import { checkResponse, order as url} from "../../services/urls";
 
 
 
@@ -13,27 +14,72 @@ const BurgerConstructor = props => {
 
 		  [winVisible, setWinVisible] = React.useState(false),
 
-		  getNumber = () => 123456789,
+		  {state, setState} = React.useContext(BurgerContext),
+
+		  reducer = (/*price, action*/) => {
+				// switch (action?.type) {
+				// 	case "addIngredient":
+				// 		return {...price, total: price.total + price.ingredient.price};
+				// 	case "removeIngredient":
+				// 		return {...price, total: state.total - price.ingredient.price};
+				// 	default:
+						const burger = state.order.currentBurger;
+						return {total: burger ? burger.ingredients.reduce(
+								(prevValue, currentValue) => prevValue + currentValue.price,
+								(burger?.bun?.price * 2) || 0
+							) : 0};
+			   // }
+		  },
+
+		  [price, dispatch] = useReducer(reducer, {total:0}),
+
+		  getOrder = () => {
+			const ingredients = state.order?.currentBurger?.ingredients &&
+				Array.from(state.order.currentBurger.ingredients, item => item._id);
+
+			state.order?.currentBurger?.bun && ingredients.push(state.order.currentBurger.bun._id);
+
+			setState({...state, order:{...state.order, hasError:false, loading:true}});
+
+			fetch(url, {
+				  method: "POST",
+				  headers: {
+					  "Content-Type": "application/json",
+				  },
+				  body: JSON.stringify({ingredients: ingredients})
+			}).then(checkResponse).then((result) => {
+				  if (result && result.success) {
+					  setState({...state, order:{...state.order, number:result?.order?.number || 0,  hasError:false, loading:false}});
+				  } else {
+					  setState({...state, order:{...state.order, hasError:true, loading:false}});
+				  }
+			}).catch((e) => {
+				  setState({...state, order:{...state.order, hasError:true, loading:false}});
+			});
+		  },
 
 		  openWin = () => {
-			  setWinVisible(true)
+			  setWinVisible(true);
+			  getOrder();
 		  },
 
 		  closeWin = () => {
 			  setWinVisible(false)
 		  };
 
+	React.useEffect(()=>dispatch(),[state.order.currentBurger]);
+
 	return (
-		props.currentBurger ?
+		state.order.currentBurger ?
 			<div className={styles.panel}>
 			<ItemsList
-				bun={props.currentBurger.bun}
-				ingredients={props.currentBurger.ingredients}
+				bun={state.order.currentBurger.bun}
+				ingredients={state.order.currentBurger.ingredients}
 			/>
 			<div className={styles.total}>
 				<div className={styles.price}>
 					<p className={cls}>
-						{props.currentBurger.total}
+						{price.total}
 					</p>
 					<CurrencyIcon type="primary"/>
 				</div>
@@ -42,16 +88,12 @@ const BurgerConstructor = props => {
 				</Button>
 			</div>
 			<Modal visible={winVisible} onClickClose={closeWin}>
-				<OrderDetails number={getNumber()}/>
+				<OrderDetails loading={state.order.loading} hasError={state.order.hasError} number={state.order.number}/>
 			</Modal>
 		</div>
 		:
 		<div className={styles.panel}/>
 	)
-};
-
-BurgerConstructor.propTypes = {
-	currentBurger: burger
 };
 
 export default BurgerConstructor;

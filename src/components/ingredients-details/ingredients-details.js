@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ingredients-details.module.css';
-import { ingredient } from "../../types/types";
+import PropTypes from 'prop-types';
+
 
 const IngredientDetails = (props) => {
 	const digitsCls = 'text text_type_digits-default text_color_inactive',
@@ -52,7 +53,12 @@ const IngredientDetails = (props) => {
 };
 
 IngredientDetails.propTypes = {
-	props: ingredient
+	name:          PropTypes.string.isRequired,
+	image_large:   PropTypes.string.isRequired,
+	calories:      PropTypes.number.isRequired,
+	proteins:      PropTypes.number.isRequired,
+	fat:           PropTypes.number.isRequired,
+	carbohydrates: PropTypes.number.isRequired
 };
 
 export default IngredientDetails;

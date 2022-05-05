@@ -20,7 +20,7 @@ const ItemsList = (props) => {
 			<div className = {styles.items}>
 				{props.ingredients.map((item, index) => (
 					<div key={index} className={styles.item}>
-						<div className={styles.icon_container}>
+						<div>
 							<DragIcon type = 'primary'/>
 						</div>
 						<ConstructorElement
