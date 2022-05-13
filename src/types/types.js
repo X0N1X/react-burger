@@ -13,6 +13,7 @@ export const ingredient = shape({
 	name:  string.isRequired,
 	price: number.isRequired,
 	image: string.isRequired,
+	used:  number.isRequired,
 	_id:   string.isRequired
 });
 

@@ -26,14 +26,6 @@
 	box-sizing: border-box;
 }
 
-.item {
-	display:        flex;
-	flex-direction: row;
-	flex-wrap:      nowrap;
-	align-content:  center;
-	align-items:    center;
-}
-
 .bun_container {
 	margin-left: 24px;
 }

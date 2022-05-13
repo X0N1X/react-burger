@@ -7,7 +7,7 @@ import { group } from "../../../types/types";
 const Category = (props) => {
 	return (
 		<>
-			<span className = {styles.title}>
+			<span className = {`${styles.title} category`} id={props.group.name}>
 					{props.group.text}
 			</span>
 			<ul className = {styles.list}>

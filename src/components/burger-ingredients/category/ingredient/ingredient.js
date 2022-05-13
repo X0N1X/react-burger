@@ -1,28 +1,39 @@
 import React from 'react';
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './ingredient.module.css';
 import { ingredient } from "../../../../types/types";
 import Modal from "../../../modal/modal"
 import IngredientDetails from "../../../ingredients-details/ingredients-details"
-
+import {useDispatch, useSelector} from "react-redux";
+import { OPEN, CLOSE} from "../../../../services/actions/ingredient";
+import { useDrag } from "react-dnd";
 
 
 const Ingredient = (props) => {
 	const cls = 'text text_type_digits-small ' + styles.price_text,
 
-		  [winVisible, setWinVisible] = React.useState(false),
+		  dispatch = useDispatch(),
 
-		  openWin = () => {
-			  setWinVisible(true)
-		  },
-		  closeWin = () => {
-			  setWinVisible(false)
-		  };
+		  { isVisible } = useSelector(store => store.ingredient),
+
+		  [, dragRef] = useDrag({
+			  type: 'ingredient',
+			  item: props.item
+		  });
 
 	return (
 		<>
-			<li className={styles.ingredient} onClick={openWin}>
-				<img className={styles.image} src={props.item.image} alt={props.item.name}/>
+
+			<li className={styles.ingredient}
+				onClick={()=>{ dispatch({type:OPEN, data:props.item})}}
+				draggable
+				ref={dragRef}
+			>
+				{props.item.used > 0 && <Counter count={props.item.used} size="default" />}
+				<img className={styles.image}
+					 src={props.item.image}
+					 alt={props.item.name}
+				/>
 				<span className={styles.price}>
 					<p className={cls}>
 						{props.item.price}
@@ -33,10 +44,10 @@ const Ingredient = (props) => {
 			</li>
 
 			<Modal
-				visible      = {winVisible}
+				visible      = {isVisible}
 				title        = "Детали ингридиента"
-				onClickClose = {closeWin}>
-					<IngredientDetails {...props.item} />
+				onClickClose = {()=>{ dispatch({type:CLOSE})}}>
+					<IngredientDetails />
 			</Modal>
 		</>
 	);

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ingredients-details.module.css';
-import PropTypes from 'prop-types';
+import {useSelector} from "react-redux";
 
 
 const IngredientDetails = (props) => {
@@ -8,11 +8,13 @@ const IngredientDetails = (props) => {
 		  labelCls  = 'text text_type_main-small text_color_inactive',
 		  nameCls   = styles.name + ' text text_type_main-default';
 
+	const ingredient = useSelector(state=>state.ingredient.data);
+
 	return (
 		<div className = {styles.panel}>
-			<img src={props.image_large} alt={props.name}/>
+			<img src={ingredient.image_large} alt={ingredient.name}/>
 			<div className = {nameCls}>
-                {props.name}
+                {ingredient.name}
 			</div>
             <ul className = {styles.list}>
                 <li className = {styles.item}>
@@ -20,7 +22,7 @@ const IngredientDetails = (props) => {
                         Калории, калл
                     </div>       
                     <div className = {digitsCls}>
-                        {props.calories}
+                        {ingredient.calories}
                     </div>                                  
                 </li>
                 <li className = {styles.item}>
@@ -28,7 +30,7 @@ const IngredientDetails = (props) => {
                         Белки, г
                     </div>       
                     <div className = {digitsCls}>
-                        {props.proteins}
+						{ingredient.proteins}
                     </div>                                  
                 </li>
                 <li className = {styles.item}>
@@ -36,7 +38,7 @@ const IngredientDetails = (props) => {
                         Жиры, г
                     </div>       
                     <div className = {digitsCls}>
-                        {props.fat}
+                        {ingredient.fat}
                     </div>                                  
                 </li>
                 <li className = {styles.item}>
@@ -44,21 +46,12 @@ const IngredientDetails = (props) => {
                         Углеводы, г
                     </div>
                     <div className={digitsCls}>
-						{props.carbohydrates}
+						{ingredient.carbohydrates}
                     </div>
                 </li>
             </ul>			
 		</div>   
 	)
-};
-
-IngredientDetails.propTypes = {
-	name:          PropTypes.string.isRequired,
-	image_large:   PropTypes.string.isRequired,
-	calories:      PropTypes.number.isRequired,
-	proteins:      PropTypes.number.isRequired,
-	fat:           PropTypes.number.isRequired,
-	carbohydrates: PropTypes.number.isRequired
 };
 
 export default IngredientDetails;
