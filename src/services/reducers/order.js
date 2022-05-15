@@ -15,7 +15,7 @@ export const order = (state = initState, action) => {
 		case SUCCESS:
 			return {...state, loading: false, hasError: false, number: action.number};
 		case ERROR:
-			return {...state, loading: false, hasError: true};
+			return {...state, loading: false, hasError: true, number:0};
 		default:
 			return state;
 	}
