@@ -6,10 +6,10 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import { postOrder } from '../../services/actions/order';
-import {ADD, RESET, setTmpBurger} from "../../services/actions/constructor";
+import { ADD, RESET } from "../../services/actions/constructor";
 import { useDrop } from "react-dnd";
 import { INCREASE } from "../../services/actions/store";
-
+import {getIngredients} from "../../services/actions/store";
 
 const BurgerConstructor = () => {
 	const dispatch = useDispatch();
@@ -20,7 +20,6 @@ const BurgerConstructor = () => {
 
 	const { order } = useSelector(state=>state);
 	const { currentBurger } = useSelector(state=>state.burger);
-	const { store } = useSelector(state=>state.store);
 
 	const reducer = () => {
 		const burger = currentBurger;
@@ -37,11 +36,14 @@ const BurgerConstructor = () => {
 	};
 
 	const closeWin = () => {
-		setWinVisible(false)
+		setWinVisible(false);
+		dispatch({
+			type: RESET
+		});
+		dispatch(getIngredients());
 	};
 
 	React.useEffect(()=>calcPrice(),[currentBurger]);
-	//React.useEffect(()=>{store && store.length && !currentBurger?.bun && dispatch({type:RESET})}, [dispatch, store]);
 
 	const [, dropTarget] = useDrop({
 		accept: 'ingredient',
@@ -81,7 +83,7 @@ const BurgerConstructor = () => {
 			</div>
 		:
 			<div className={styles.panel} ref={dropTarget}>
-				Переместите ингредиетны
+				Переместите сюда булку и ингредиетны
 			</div>
 	)
 };

@@ -14,20 +14,6 @@ const Item = (props) => {
 
 	const ref = useRef(null);
 
-	const removeItem = (e) => {
-		const index = +e.currentTarget.closest('div.ingredient').getAttribute('index'),
-			  item = props.ingredients[index];
-
-		dispatch({
-			type: DELETE,
-			data: index
-		});
-		dispatch({
-			type: DECREASE,
-			data: item
-		});
-	};
-
 	const [{ isDrag }, drag] = useDrag({
 		type: 'constructorCard',
 		item: {item: props.item, index: props.index}
@@ -47,6 +33,19 @@ const Item = (props) => {
 	});
 
 	const dragDropRef = drag(drop(ref));
+
+	const removeItem = () => {
+		const index = dragDropRef.current.getAttribute('index');
+
+		dispatch({
+			type: DELETE,
+			data: +index
+		});
+		dispatch({
+			type: DECREASE,
+			data: props.item
+		});
+	};
 
 	return (
 		<div index={props.index} className={`${styles.item} ${ isDrag && styles.drag} ingredient`} draggable ref={dragDropRef}>

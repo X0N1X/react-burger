@@ -1,4 +1,4 @@
-import { ADD, DELETE, RESET, TMP, ORDER } from '../actions/constructor'
+import { ADD, DELETE, RESET, ORDER } from '../actions/constructor'
 
 const initState = {
 	currentBurger: {
@@ -65,10 +65,7 @@ export const burger = (state = initState, action) => {
 			};
 
 		case RESET:
-			return {...state, currentBurger: initState};
-
-		case TMP:
-			return {...state, currentBurger: action.data};
+			return initState;
 
 		default:
 			return state;
