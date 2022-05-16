@@ -66,7 +66,7 @@ const BurgerConstructor = () => {
 					bun={currentBurger.bun}
 					ingredients={currentBurger.ingredients}
 				/>
-				{currentBurger.bun && currentBurger.ingredients.length !== 0 &&
+
 					<div className={styles.total}>
 						<div className={styles.price}>
 							<p className={cls}>
@@ -78,7 +78,7 @@ const BurgerConstructor = () => {
 							Оформить заказ
 						</Button>
 					</div>
-				}
+
 				<Modal visible={winVisible} onClickClose={closeWin}>
 					<OrderDetails loading={order.loading} hasError={order.hasError} number={order.number}/>
 				</Modal>
