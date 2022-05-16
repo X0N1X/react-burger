@@ -60,13 +60,13 @@ const BurgerConstructor = () => {
 	});
 
 	return (
-		currentBurger ?
+		currentBurger && (currentBurger.bun || currentBurger.ingredients.length) ?
 			<div className={styles.panel} ref={dropTarget}>
 				<ItemsList
 					bun={currentBurger.bun}
 					ingredients={currentBurger.ingredients}
 				/>
-				{currentBurger.bun && currentBurger.ingredients &&
+				{currentBurger.bun && currentBurger.ingredients.length &&
 					<div className={styles.total}>
 						<div className={styles.price}>
 							<p className={cls}>
@@ -76,7 +76,7 @@ const BurgerConstructor = () => {
 						</div>
 						<Button type="primary" size="large" onClick={openWin}>
 							Оформить заказ
-						</Button>s
+						</Button>
 					</div>
 				}
 				<Modal visible={winVisible} onClickClose={closeWin}>
