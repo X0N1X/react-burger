@@ -26,9 +26,9 @@ const BurgerIngredients = () => {
 			return categories[index].offsetTop;
 		});
 
-		const index = points.findIndex(point => top < point);
+		const index = points.findIndex(point => {console.log(top, point); return top+200 < point});
 
-		dispatch({type:CHANGE_GROUP, data:categories[index !== -1 ? index : categories.length - 1].id});
+		dispatch({type:CHANGE_GROUP, data:categories[index !== -1 ? (index === 0 ? 0 : index - 1) : categories.length - 1].id});
 
 	};
 

@@ -60,23 +60,25 @@ const BurgerConstructor = () => {
 	});
 
 	return (
-		currentBurger && currentBurger.bun ?
+		currentBurger ?
 			<div className={styles.panel} ref={dropTarget}>
 				<ItemsList
 					bun={currentBurger.bun}
 					ingredients={currentBurger.ingredients}
 				/>
-				<div className={styles.total}>
-					<div className={styles.price}>
-						<p className={cls}>
-							{price.total}
-						</p>
-						<CurrencyIcon type="primary"/>
+				{currentBurger.bun && currentBurger.ingredients &&
+					<div className={styles.total}>
+						<div className={styles.price}>
+							<p className={cls}>
+								{price.total}
+							</p>
+							<CurrencyIcon type="primary"/>
+						</div>
+						<Button type="primary" size="large" onClick={openWin}>
+							Оформить заказ
+						</Button>s
 					</div>
-					<Button type="primary" size="large" onClick={openWin}>
-						Оформить заказ
-					</Button>
-				</div>
+				}
 				<Modal visible={winVisible} onClickClose={closeWin}>
 					<OrderDetails loading={order.loading} hasError={order.hasError} number={order.number}/>
 				</Modal>

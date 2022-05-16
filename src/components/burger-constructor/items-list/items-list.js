@@ -5,33 +5,37 @@ import PropTypes from "prop-types";
 import { ingredient } from "../../../types/types";
 import Item from "./item/item";
 
-const ItemsList = (props) => {
+const ItemsList = ({ bun, ingredients }) => {
 
 	return (
 		<div className = {styles.list}>
-			<div className={styles.bun_container}>
-				<ConstructorElement
-					type      = "top"
-					isLocked  = {true}
-					text      = {props.bun.name + ' (верх)'}
-					price     = {props.bun.price}
-					thumbnail = {props.bun.image}
-				/>
-			</div>
-			{props.ingredients &&
-				<div className={styles.items}>
-					{props.ingredients.map((item, index) => <Item key={index} item={item} index={index}/>)}
+			{bun &&
+				<div className={styles.bun_container}>
+					<ConstructorElement
+						type      = "top"
+						isLocked  = {true}
+						text      = {bun.name + ' (верх)'}
+						price     = {bun.price}
+						thumbnail = {bun.image}
+					/>
 				</div>
 			}
-			<div className={styles.bun_container}>
-				<ConstructorElement
-					type      = "bottom"
-					isLocked  = {true}
-					text      = {props.bun.name + ' (низ)'}
-					price     = {props.bun.price}
-					thumbnail = {props.bun.image}
-				/>
-			</div>
+			{ingredients &&
+				<div className={styles.items}>
+					{ingredients.map((item, index) => <Item key={index} item={item} index={index}/>)}
+				</div>
+			}
+			{bun &&
+				<div className={styles.bun_container}>
+					<ConstructorElement
+						type      = "bottom"
+						isLocked  = {true}
+						text      = {bun.name + ' (низ)'}
+						price     = {bun.price}
+						thumbnail = {bun.image}
+					/>
+				</div>
+			}
 		</div>
 	);
 };
