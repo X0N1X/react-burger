@@ -9,7 +9,7 @@ import { OPEN, CLOSE} from "../../../../services/actions/ingredient";
 import { useDrag } from "react-dnd";
 
 
-const Ingredient = (props) => {
+const Ingredient = ({ item }) => {
 	const cls = 'text text_type_digits-small ' + styles.price_text,
 
 		  dispatch = useDispatch(),
@@ -18,29 +18,29 @@ const Ingredient = (props) => {
 
 		  [, dragRef] = useDrag({
 			  type: 'ingredient',
-			  item: props.item
+			  item: item
 		  });
 
 	return (
 		<>
 
 			<li className={styles.ingredient}
-				onClick={()=>{ dispatch({type:OPEN, data:props.item})}}
+				onClick={()=>{ dispatch({type:OPEN, data:item})}}
 				draggable
 				ref={dragRef}
 			>
-				{props.item.used > 0 && <Counter count={props.item.used} size="default" />}
+				{item.used > 0 && <Counter count={item.used} size="default" />}
 				<img className={styles.image}
-					 src={props.item.image}
-					 alt={props.item.name}
+					 src={item.image}
+					 alt={item.name}
 				/>
 				<span className={styles.price}>
 					<p className={cls}>
-						{props.item.price}
+						{item.price}
 					</p>
 					<CurrencyIcon type="primary"/>
 				</span>
-				{props.item.name}
+				{item.name}
 			</li>
 
 			<Modal

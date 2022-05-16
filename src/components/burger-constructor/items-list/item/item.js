@@ -8,7 +8,7 @@ import { DELETE, ORDER } from "../../../../services/actions/constructor";
 import { DECREASE } from "../../../../services/actions/store";
 import { useDrag, useDrop } from "react-dnd";
 
-const Item = (props) => {
+const Item = ({ item,index }) => {
 
 	const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const Item = (props) => {
 
 	const [{ isDrag }, drag] = useDrag({
 		type: 'constructorCard',
-		item: {item: props.item, index: props.index}
+		item: {item: item, index: index}
 	});
 
 	const [, drop] = useDrop({
@@ -26,7 +26,7 @@ const Item = (props) => {
 				type: ORDER,
 				data: {
 					from: item.index,
-					to:   props.index
+					to:   index
 				}
 			});
 		}
@@ -43,19 +43,19 @@ const Item = (props) => {
 		});
 		dispatch({
 			type: DECREASE,
-			data: props.item
+			data: item
 		});
 	};
 
 	return (
-		<div index={props.index} className={`${styles.item} ${ isDrag && styles.drag} ingredient`} draggable ref={dragDropRef}>
+		<div index={index} className={`${styles.item} ${ isDrag && styles.drag} ingredient`} draggable ref={dragDropRef}>
 			<div>
 				<DragIcon type = 'primary'/>
 			</div>
 			<ConstructorElement
-				text      = {props.item.name}
-				price     = {props.item.price}
-				thumbnail = {props.item.image}
+				text      = {item.name}
+				price     = {item.price}
+				thumbnail = {item.image}
 				handleClose = {removeItem}
 			/>
 		</div>
