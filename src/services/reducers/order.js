@@ -1,7 +1,6 @@
 import {REQUEST, SUCCESS, ERROR} from '../actions/order'
 
 const initState = {
-	currentBurger: null,
 	number:        0,
 	loading:       false,
 	hasError:      false

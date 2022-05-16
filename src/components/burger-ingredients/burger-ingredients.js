@@ -13,8 +13,6 @@ const BurgerIngredients = () => {
 
 	const { group } = useSelector(state=>state.state);
 
-	const handleChangeTab = (tab) => {};// {this.setState(oldState => ({...oldState, currentTab:tab}))};
-
 	const titleCls = 'text text_type_main-large ' + styles.title;
 
 	const scrollHandler = (e) => {
@@ -26,10 +24,18 @@ const BurgerIngredients = () => {
 			return categories[index].offsetTop;
 		});
 
-		const index = points.findIndex(point => {console.log(top, point); return top+200 < point});
+		const index = points.findIndex(point => top+200 < point);
 
 		dispatch({type:CHANGE_GROUP, data:categories[index !== -1 ? (index === 0 ? 0 : index - 1) : categories.length - 1].id});
 
+	};
+
+	const handleChangeTab = (tab) => {
+
+		dispatch({type:CHANGE_GROUP, data:tab});
+
+		const element = document.getElementById(tab);
+		if (element) element.scrollIntoView({ behavior: 'smooth' });
 	};
 
 	return (
@@ -46,18 +52,18 @@ const BurgerIngredients = () => {
 					Булки
 				</Tab>
 				<Tab
-					value   = "sauce"
-					active  = {group === 'sauce'}
-					onClick = {handleChangeTab}
-				>
-					Соусы
-				</Tab>
-				<Tab
 					value   = "main"
 					active  = {group === 'main'}
 					onClick = {handleChangeTab}
 				>
 					Начинки
+				</Tab>
+				<Tab
+					value   = "sauce"
+					active  = {group === 'sauce'}
+					onClick = {handleChangeTab}
+				>
+					Соусы
 				</Tab>
 			</header>
 			<section className = {styles.section} onScroll={scrollHandler}>
