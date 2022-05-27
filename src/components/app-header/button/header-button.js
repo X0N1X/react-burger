@@ -4,16 +4,16 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from "./header-button.module.css";
 
 
-const HeaderButton = (props) => {
+const HeaderButton = ({ icon,tabText, tabName, currentTab }) => {
 	return (
 		<div className={styles.button}>
 			<Button type="secondary" size="medium">
 				<div className = {styles.icon}>
-					{props.icon}
+					{icon}
 				</div>
-				<span className = {props.currentTab === props.tabName ?
+				<span className = {currentTab === tabName ?
 						styles.active_text : styles.inactive_text}>
-					{props.tabText}
+					{tabText}
 				</span>
 			</Button>
 		</div>
@@ -21,9 +21,10 @@ const HeaderButton = (props) => {
 };
 
 HeaderButton.propTypes = {
-	icon:    PropTypes.element.isRequired,
-	tabName: PropTypes.string.isRequired,
-	tabText: PropTypes.string.isRequired
+	icon:       PropTypes.element.isRequired,
+	tabName:    PropTypes.string.isRequired,
+	tabText:    PropTypes.string.isRequired,
+	currentTab: PropTypes.string.isRequired
 };
 
 export default HeaderButton;

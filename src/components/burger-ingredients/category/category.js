@@ -4,14 +4,14 @@ import styles from './category.module.css';
 import { group } from "../../../types/types";
 
 
-const Category = (props) => {
+const Category = ({ group }) => {
 	return (
 		<>
-			<span className = {styles.title}>
-					{props.group.text}
+			<span className = {`${styles.title} category`} id={group.name}>
+					{group.text}
 			</span>
 			<ul className = {styles.list}>
-				{props.group.children.map((item) => (
+				{group.children.map((item) => (
 					<Ingredient key = {item._id} item = {item}/>
 				))}
 			</ul>

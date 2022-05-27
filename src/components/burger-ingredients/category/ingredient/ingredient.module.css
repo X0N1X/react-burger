@@ -7,6 +7,17 @@
 	width:           272px;
 }
 
+.drag {
+	cursor: grabbing;
+}
+
+.ingredient div[class^="counter_counter"] {
+	position:         relative;
+	right:            10px;
+	align-self:       end;
+	margin-block-end: -32px;
+}
+
 .image {
 	margin-bottom: 4px;
 }

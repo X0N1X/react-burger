@@ -1,0 +1,3 @@
+
+export const CHANGE_TAB   = 'STATE_CHANGE_TAB';
+export const CHANGE_GROUP = 'STATE_CHANGE_GROUP';
