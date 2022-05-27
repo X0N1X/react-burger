@@ -2,6 +2,7 @@ import {REQUEST, SUCCESS, ERROR, INCREASE, DECREASE } from '../actions/store'
 
 const initState = {
 	store:       [],
+	raw:         [],
 	loading:    false,
 	hasError:   false
 };
@@ -52,7 +53,8 @@ export const store = (state = initState, action) => {
 		case SUCCESS:
 			return {
 				...state,
-				store:     getGroups(action.data),
+				store:    getGroups(action.data),
+				raw:      action.data,
 				loading:  false,
 				hasError: false
 			};

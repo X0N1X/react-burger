@@ -25,7 +25,7 @@ const Item = ({ item,index }) => {
 			dispatch({
 				type: ORDER,
 				data: {
-					from: item.index,
+					from: item.app,
 					to:   index
 				}
 			});
@@ -35,7 +35,7 @@ const Item = ({ item,index }) => {
 	const dragDropRef = drag(drop(ref));
 
 	const removeItem = () => {
-		const index = dragDropRef.current.getAttribute('index');
+		const index = dragDropRef.current.getAttribute('app.js.js');
 
 		dispatch({
 			type: DELETE,

@@ -2,35 +2,35 @@ import React from 'react';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import HeaderButton from './button/header-button';
 import styles from './app-header.module.css';
-import PropTypes from 'prop-types';
+import { useMatch } from "react-router-dom";
 
 
-const AppHeader = ({ currentTab }) => {
+const AppHeader = () => {
+
+	const isMain    = !!useMatch({path: '/', exact: true}),
+		  isProfile = !!useMatch('/profile'),
+		  isOrders  = !!useMatch('/orders');
 
 	return (
 		<header className={styles.header}>
 			<HeaderButton
-				icon       = {<BurgerIcon type = {currentTab === 'constructor' ? 'primary' : 'secondary'}/>}
-				tabName    = 'constructor'
+				icon       = {<BurgerIcon type = {isMain ? 'primary' : 'secondary'}/>}
+				active     =  {isMain}
 				tabText    = 'Конструктор'
-				currentTab = {currentTab}/>
+				path       = '/'/>
 			<HeaderButton
-				icon       = {<ListIcon type = {currentTab === 'orders' ? 'primary' : 'secondary'}/>}
-				tabName    = 'orders'
+				icon       = {<ListIcon type = {isOrders ? 'primary' : 'secondary'}/>}
+				active     = {isOrders}
 				tabText    = 'Лента заказов'
-				currentTab = {currentTab}/>
+				path       = '/orders'/>
 			<Logo />
 			<HeaderButton
-				icon       = {<ProfileIcon type = {currentTab === 'profile' ? 'primary' : 'secondary'}/>}
-				tabName    = 'profile'
+				icon       = {<ProfileIcon type = {isProfile ? 'primary' : 'secondary'}/>}
+				active     = {isProfile}
 				tabText    = 'Личный кабинет'
-				currentTab = {currentTab}/>
+				path       = '/profile'/>
 		</header>
 	)
-};
-
-AppHeader.propTypes = {
-	currentTab: PropTypes.string.isRequired
 };
 
 export default AppHeader;

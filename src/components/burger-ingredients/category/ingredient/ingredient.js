@@ -2,19 +2,14 @@ import React from 'react';
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './ingredient.module.css';
 import { ingredient } from "../../../../types/types";
-import Modal from "../../../modal/modal"
-import IngredientDetails from "../../../ingredients-details/ingredients-details"
-import {useDispatch, useSelector} from "react-redux";
-import { OPEN, CLOSE} from "../../../../services/actions/ingredient";
 import { useDrag } from "react-dnd";
+import { Link, useLocation } from 'react-router-dom';
 
 
 const Ingredient = ({ item }) => {
 	const cls = 'text text_type_digits-small ' + styles.price_text,
 
-		  dispatch = useDispatch(),
-
-		  { isVisible } = useSelector(store => store.ingredient),
+		  location = useLocation(),
 
 		  [, dragRef] = useDrag({
 			  type: 'ingredient',
@@ -22,10 +17,12 @@ const Ingredient = ({ item }) => {
 		  });
 
 	return (
-		<>
+		<Link className={styles.link}
+			to    = {'/ingredients/' + item._id}
+			state = {{background: location}}
+		>
 
 			<li className={styles.ingredient}
-				onClick={()=>{ dispatch({type:OPEN, data:item})}}
 				draggable
 				ref={dragRef}
 			>
@@ -42,14 +39,7 @@ const Ingredient = ({ item }) => {
 				</span>
 				{item.name}
 			</li>
-
-			<Modal
-				visible      = {isVisible}
-				title        = "Детали ингридиента"
-				onClickClose = {()=>{ dispatch({type:CLOSE})}}>
-					<IngredientDetails />
-			</Modal>
-		</>
+		</Link>
 	);
 };
 

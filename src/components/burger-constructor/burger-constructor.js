@@ -9,10 +9,12 @@ import { postOrder } from '../../services/actions/order';
 import { ADD, RESET } from "../../services/actions/constructor";
 import { useDrop } from "react-dnd";
 import { INCREASE } from "../../services/actions/store";
-import {getIngredients} from "../../services/actions/store";
+import { getIngredients } from "../../services/actions/store";
+import { useNavigate } from "react-router-dom";
 
 const BurgerConstructor = () => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch(),
+		  navigate = useNavigate();
 
 	const cls = 'text text_type_digits-medium ' + styles.price_text;
 
@@ -20,6 +22,7 @@ const BurgerConstructor = () => {
 
 	const { order } = useSelector(state=>state);
 	const { currentBurger } = useSelector(state=>state.burger);
+	const { isAuth } = useSelector(state => state.user);
 
 	const reducer = () => {
 		const burger = currentBurger;
@@ -31,6 +34,10 @@ const BurgerConstructor = () => {
 	const [price, calcPrice] = useReducer(reducer, {total:0});
 
 	const openWin = () => {
+		if (!isAuth) {
+			navigate("/login");
+			return;
+		}
 		setWinVisible(true);
 		dispatch(postOrder(currentBurger));
 	};

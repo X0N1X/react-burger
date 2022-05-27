@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './ingredients-details.module.css';
 import {useSelector} from "react-redux";
+import { useParams } from 'react-router-dom';
 
 
-const IngredientDetails = (props) => {
+const IngredientDetails = () => {
 	const digitsCls = 'text text_type_digits-default text_color_inactive',
 		  labelCls  = 'text text_type_main-small text_color_inactive',
 		  nameCls   = styles.name + ' text text_type_main-default';
 
-	const ingredient = useSelector(state=>state.ingredient.data);
+	const { ingredientId } = useParams();
+	const ingredients = useSelector(state => state.store.raw);
+	const ingredient = useMemo(() => (
+		ingredients.find(item => item._id === ingredientId)
+	), [ingredients, ingredientId]);
 
-	return (
+	return ingredient ? (
 		<div className = {styles.panel}>
 			<img src={ingredient.image_large} alt={ingredient.name}/>
 			<div className = {nameCls}>
@@ -51,7 +56,7 @@ const IngredientDetails = (props) => {
                 </li>
             </ul>			
 		</div>   
-	)
+	) : (<></>)
 };
 
 export default IngredientDetails;
