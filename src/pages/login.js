@@ -1,10 +1,12 @@
 import React from "react";
 import styles from './panel.module.css';
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { login, setLogin } from "../services/actions/login";
 import { useSelector } from "react-redux";
+import { checkAccessToken } from "../services/urls";
+
 
 export function PageLogin() {
     const titleCls = 'text text_type_main-large ' + styles.header;
@@ -13,7 +15,10 @@ export function PageLogin() {
     const { isAuth } = useSelector(state => state.user);
     const { loading } = useSelector(state => state.login);
 
+    const isAccessToken = checkAccessToken();
+
     const dispatch = useDispatch();
+    const { state } = useLocation();
 
     const onChange = (e) => {
         dispatch(setLogin(e.target.name, e.target.value))
@@ -24,9 +29,9 @@ export function PageLogin() {
         dispatch(login());
     };
 
-    if (isAuth) {
+    if (isAuth || isAccessToken) {
         return (
-          <Navigate to="/"/>
+          <Navigate to={state ? state.from : '/'} replace={true}/>
         );
     }
 

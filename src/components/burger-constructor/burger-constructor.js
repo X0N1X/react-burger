@@ -11,6 +11,7 @@ import { useDrop } from "react-dnd";
 import { INCREASE } from "../../services/actions/store";
 import { getIngredients } from "../../services/actions/store";
 import { useNavigate } from "react-router-dom";
+import { checkAccessToken } from "../../services/urls";
 
 const BurgerConstructor = () => {
 	const dispatch = useDispatch(),
@@ -34,12 +35,12 @@ const BurgerConstructor = () => {
 	const [price, calcPrice] = useReducer(reducer, {total:0});
 
 	const openWin = () => {
-		if (!isAuth) {
+		if (isAuth && checkAccessToken()) {
+			setWinVisible(true);
+			dispatch(postOrder(currentBurger));
+		} else {
 			navigate("/login");
-			return;
 		}
-		setWinVisible(true);
-		dispatch(postOrder(currentBurger));
 	};
 
 	const closeWin = () => {

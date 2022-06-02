@@ -46,3 +46,48 @@ export function getCookie(name) {
 export function deleteCookie(name) {
 	setCookie(name, null, { expires: -1 });
 }
+
+const refreshToken = () => {
+	return fetch (token, {
+			method: 'POST',
+			mode:   'cors',
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({token: localStorage.getItem("refreshToken")}),
+		}
+	).then(checkResponse);
+};
+
+export const fetchWithRefreshToken = async (url, options) => {
+	try {
+		const res = await fetch(url, options);
+		return await checkResponse(res);
+	} catch (err) {
+		if(err.message === "jwt expired"){
+			const refreshData = await refreshToken();
+			if (!refreshData.success){
+				Promise.reject(refreshData);
+			}
+			setCookie("accessToken", refreshData.accessToken);
+			localStorage.setItem("refreshToken", refreshData.refreshToken);
+			options.headers.authorization = refreshData.accessToken;
+			const res = await fetch(url, options);
+			return await checkResponse(res);
+		} else {
+			return Promise.reject(err);
+		}
+	}
+};
+
+export const checkAccessToken = () => {
+	const accessToken = getCookie('accessToken');
+	if (accessToken) {
+		const decodedToken = jwt_decode(accessToken);
+		const currentTime = new Date().getTime();
+		if (decodedToken.exp * 1000 < currentTime) {
+			return false;
+		}
+	}
+	return accessToken ? true : false;
+};

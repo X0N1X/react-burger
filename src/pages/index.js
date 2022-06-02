@@ -15,6 +15,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { PublicOnlyRoute, ProtectedRoute } from "../services/routes";
 import IngredientDetailsModal from "../components/ingredients-details/ingredient-details-modal";
 import App from '../components/app/app'
+import { checkAccessToken } from "../services/urls";
 
 const Pages = () => {
 	const dispatch   = useDispatch(),
@@ -23,12 +24,14 @@ const Pages = () => {
 
 	const { isAuth } = useSelector(state => state.user);
 
+	const isAccessToken = checkAccessToken();
+
 	React.useEffect(() => {
 		dispatch(getIngredients());
-		if (isAuth) {
+		if (isAuth || isAccessToken) {
 			dispatch(getUser());
 		}
-	}, [dispatch]);
+	}, [dispatch, isAccessToken, isAuth]);
 
 	return (
 		<>

@@ -9,7 +9,7 @@ const BurgerIngredients = () => {
 
 	const dispatch = useDispatch();
 
-	const { store } = useSelector(state=>state.store);
+	const { store, loading, error } = useSelector(state=>state.store);
 
 	const { group } = useSelector(state=>state.state);
 
@@ -38,7 +38,17 @@ const BurgerIngredients = () => {
 		if (element) element.scrollIntoView({ behavior: 'smooth' });
 	};
 
-	return (
+	if (error) {
+		return (
+			<div className={styles.panel}>
+				<p className = {titleCls}>
+					'Ошибка заргузки данных. Перезагрузите сайт.'
+				</p>
+			</div>
+		)
+	}
+
+	return ( !loading &&
 		<div className={styles.panel}>
 			<p className = {titleCls}>
 				Собирите бургер

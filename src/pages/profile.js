@@ -8,10 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 export function PageProfile() {
     const dispatch = useDispatch();
 
-    const { isAuth } = useSelector(state => state.user);
-
     useEffect(()=>{
-        isAuth && dispatch(getUser());
+        dispatch(getUser());
     },[dispatch]);
 
     const { name, email, password } = useSelector(state => state.user.profile);
@@ -27,11 +25,10 @@ export function PageProfile() {
         dispatch(patchUser());
     };
 
-    if (!isAuth) {
-        return (
-            <Navigate to="/login"/>
-        );
-    }
+    const cancel = (e) => {
+        e.preventDefault();
+        dispatch(getUser());
+    };
 
     return (
         <section className={styles.panel}>
@@ -93,13 +90,23 @@ export function PageProfile() {
                     value    = {password}
                     name     = "password"
                 />
-                <Button
-                    type     = "primary"
-                    size     = "medium"
-                    disabled = {patchLoading}
-                >
-                    Сохранить
-                </Button>
+                <div className={styles.btn_container}>
+                    <Button
+                        type     = "primary"
+                        size     = "medium"
+                        disabled = {patchLoading}
+                        onClick  = {cancel}
+                    >
+                        Отмена
+                    </Button>
+                    <Button
+                        type     = "primary"
+                        size     = "medium"
+                        disabled = {patchLoading}
+                    >
+                        Сохранить
+                    </Button>
+                </div>
             </form>
         </section>
     )

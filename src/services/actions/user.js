@@ -1,4 +1,4 @@
-import { setCookie, getCookie, deleteCookie, checkResponse, logout as logoutUrl, user as userUrl, token as tokenUrl} from "../urls";
+import { getCookie, deleteCookie, checkResponse, logout as logoutUrl, user as userUrl, fetchWithRefreshToken} from "../urls";
 
 export const GET_REQUEST = "USER_GET_REQUEST";
 export const GET_SUCCESS = "USER_GET_SUCCESS";
@@ -12,39 +12,6 @@ export const PATCH_ERROR   = "USER_PATCH_ERROR";
 export const LOGOUT = "USER_LOGOUT";
 
 export const setUser = (field, value) => ({type: SET, field, value});
-
-const refreshToken = () => {
-    return fetch (tokenUrl, {
-            method: 'POST',
-            mode:   'cors',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({token: localStorage.getItem("refreshToken")}),
-        }
-    ).then(checkResponse);
-};
-
-const fetchWithRefreshToken = async (url, options) => {
-    try {
-        const res = await fetch(url, options);
-        return await checkResponse(res);
-    } catch (err) {
-        if (err.message === "jwt expired") {
-            const data = await refreshToken();
-            if (!data.success) {
-                return Promise.reject(data);
-            }
-            setCookie("accessToken", data.accessToken);
-            localStorage.setItem("refreshToken", data.refreshToken);
-            options.headers.authorization = data.accessToken;
-            const res = await fetch(url, options);
-            return await checkResponse(res);
-        } else {
-            return Promise.reject(err);
-        }
-    }
-};
 
 export const getUser = () => {
     return async (dispatch) => {
