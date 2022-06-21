@@ -7,8 +7,9 @@ import { checkAccessToken } from "./urls";
 const PublicOnlyRoute = ({ outlet }) => {
     const { isAuth } = useSelector(state => state.user),
           isAccessToken = checkAccessToken();
+    const { state } = useLocation();
 
-    return !isAuth && !isAccessToken ? outlet : (<Navigate to={'/'}/>);
+    return !isAuth && !isAccessToken ? outlet : (<Navigate to={state ? state.from : '/'} replace={true}/>);
 };
 
 const ProtectedRoute = ({ outlet }) => {

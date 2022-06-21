@@ -48,7 +48,6 @@ const BurgerConstructor = () => {
 		dispatch({
 			type: RESET
 		});
-		dispatch(getIngredients());
 	};
 
 	React.useEffect(()=>calcPrice(),[currentBurger]);
