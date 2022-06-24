@@ -22,7 +22,7 @@ export const registration = () => {
 		}).then((result) => {
 			if (result && result.success) {
 				const accessToken = result.accessToken.split("Bearer ")[1];
-				setCookie("accessToken", accessToken);
+				setCookie("accessToken", accessToken, { path: '/' });
 				localStorage.setItem("refreshToken", result.refreshToken);
 
 				dispatch(getUser());

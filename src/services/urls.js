@@ -44,7 +44,7 @@ export function getCookie(name) {
 }
 
 export function deleteCookie(name) {
-	setCookie(name, null, { expires: -1 });
+	setCookie(name, null, { expires: -1, path: '/'});
 }
 
 const refreshToken = () => {
@@ -70,7 +70,7 @@ export const fetchWithRefreshToken = async (url, options) => {
 				Promise.reject(refreshData);
 			}
 			const accessToken = refreshData.accessToken.split("Bearer ")[1];
-			setCookie("accessToken", accessToken);
+			setCookie("accessToken", accessToken, { path: '/' });
 			localStorage.setItem("refreshToken", refreshData.refreshToken);
 			options.headers.authorization = accessToken;
 			const res = await fetch(url, options);

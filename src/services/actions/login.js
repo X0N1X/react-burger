@@ -21,7 +21,7 @@ export const login = () => {
 		}).then(checkResponse).then(result => {
 			if (result && result.success) {
 				let accessToken = result.accessToken.split("Bearer ")[1];
-				setCookie("accessToken", accessToken);
+				setCookie("accessToken", accessToken, { path: '/' });
 				localStorage.setItem("refreshToken", result.refreshToken);
 				dispatch({type: SUCCESS, user: result.user});
 				dispatch({type: GET_SUCCESS, name: result.user.name, email: result.user.email});
