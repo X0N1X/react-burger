@@ -1,0 +1,8 @@
+.constructor_section {
+  display:         flex;
+  flex-direction:  row;
+  flex-wrap:       nowrap;
+  justify-content: center;
+  align-items:     flex-start;
+  column-gap:      40px;
+}

@@ -35,3 +35,8 @@
 .price_text {
 	margin-right: 8px;
 }
+
+.link {
+	text-decoration: none;
+	color: #F2F2F3;
+}
