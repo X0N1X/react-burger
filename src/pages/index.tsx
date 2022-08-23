@@ -6,6 +6,7 @@ import { PageLogout} from "./logout";
 import { PageProfile } from "./profile";
 import { PageReset } from "./reset";
 import { PageForgot } from "./forgot";
+import { FeedPage} from "./feed";
 import { Page404 } from "./404";
 import { PageIngredientDetail } from "./ingredient-detail";
 import { getIngredients } from "../services/actions/store";
@@ -42,8 +43,11 @@ const Pages = () => {
 					<Route path="register" element={<PublicOnlyRoute outlet={<PageRegistration/>}/>}/>
 					<Route path="forgot-password" element={<PublicOnlyRoute outlet={<PageForgot/>}/>}/>
 					<Route path="reset-password" element={<PublicOnlyRoute outlet={<PageReset/>}/>}/>
+					<Route path="feed" element={<FeedPage/>}/>
+					<Route path="/feed/:id" element={<Page404/>}/>
 					<Route path="profile" element={<ProtectedRoute  outlet={<PageProfile/>}/>}>
-						<Route path="orders" element={<Page404/>}/>
+						<Route path="orders" element={<ProtectedRoute  outlet={<PageProfile/>}/>}/>
+						<Route path="orders/:id" element={<ProtectedRoute  outlet={<PageProfile/>}/>}/>
 					</Route>
 					<Route index element={<PageMain/>}/>
 					<Route path="/ingredients/:ingredientId" element={<PageIngredientDetail/>}/>

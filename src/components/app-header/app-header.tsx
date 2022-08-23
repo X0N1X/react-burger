@@ -22,7 +22,7 @@ const AppHeader = () => {
 				icon       = {<ListIcon type = {isOrders ? 'primary' : 'secondary'}/>}
 				active     = {isOrders}
 				tabText    = 'Лента заказов'
-				path       = '/orders'/>
+				path       = '/feed'/>
 			<Logo />
 			<HeaderButton
 				icon       = {<ProfileIcon type = {isProfile ? 'primary' : 'secondary'}/>}

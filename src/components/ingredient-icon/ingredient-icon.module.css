@@ -1,0 +1,31 @@
+.item_icon {
+	position:      relative;
+	overflow:      hidden;
+	width:         64px;
+	height:        64px;
+	border-radius: 100px;
+	border:        2px solid #801AB2;
+	background:    #000;
+}
+
+.item_icon span {
+	position:    absolute;
+	display:     block;
+	width:       100%;
+	height:      100%;
+	left:        0;
+	top:         0;
+	text-align:  center;
+	line-height: 60px;
+	z-index:     2;
+	background:  rgba(0, 0, 0, 0.88);
+}
+
+.item_icon img {
+	position:   absolute;
+	width:      100%;
+	height:     100%;
+	left:       0;
+	top:        0;
+	object-fit: contain;
+}

@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { checkAccessToken } from "../../services/urls";
 import { useAppSelector, useAppDispatch} from "../../hooks";
 import { TBurger } from "../../services/reducers/constuctor";
-import { TIngregient } from "../../types/types";
+import { TIngredient } from "../../types/types";
 
 const BurgerConstructor = () => {
 	const dispatch = useAppDispatch(),
@@ -71,7 +71,7 @@ const BurgerConstructor = () => {
 		currentBurger && (currentBurger.bun || currentBurger.ingredients.length) ?
 			<div className={styles.panel} ref={dropTarget}>
 				<ItemsList
-					bun={currentBurger.bun as TIngregient}
+					bun={currentBurger.bun as TIngredient}
 					ingredients={currentBurger.ingredients}
 				/>
 

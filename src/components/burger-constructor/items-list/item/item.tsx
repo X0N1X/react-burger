@@ -5,11 +5,11 @@ import { useDispatch } from "react-redux";
 import { DELETE, ORDER } from "../../../../services/actions/constructor";
 import { DECREASE } from "../../../../services/actions/store";
 import { useDrag, useDrop, DragObjectFactory } from "react-dnd";
-import {TIngregient} from "../../../../types/types";
+import {TIngredient} from "../../../../types/types";
 
 
 interface IItem {
-	item:TIngregient;
+	item:TIngredient;
 	index:number;
 }
 
@@ -30,7 +30,7 @@ const Item = ({ item, index }:IItem) => {
 			dispatch({
 				type: ORDER,
 				data: {
-					from: item.index,
+					from: item.order,
 					to:   index
 				}
 			} as any);

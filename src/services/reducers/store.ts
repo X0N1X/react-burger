@@ -1,9 +1,9 @@
 import {REQUEST, SUCCESS, ERROR, INCREASE, DECREASE } from '../actions/store'
-import { TGroup, TIngregient } from "../../types/types";
+import { TGroup, TIngredient } from "../../types/types";
 
 export interface IStore {
 	store:      TGroup[];
-	raw:        TIngregient[];
+	raw:        TIngredient[];
 	loading:    boolean;
 	hasError:   boolean;
 }
@@ -15,7 +15,7 @@ const initState: IStore = {
 	hasError:   false
 };
 
-const getGroups = (store:TIngregient[]) => {
+const getGroups = (store:TIngredient[]) => {
 	const groups: TGroup[] = [];
 
 	store.forEach(item => {
