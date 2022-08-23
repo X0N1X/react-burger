@@ -17,6 +17,7 @@ import IngredientDetailsModal from "../components/ingredients-details/ingredient
 import App from '../components/app/app'
 import { checkAccessToken } from "../services/urls";
 import { useAppDispatch, useAppSelector } from "../hooks";
+import { FeedOrderDetailModal } from "../components/feed-order-detail/feed-order-delail-modal";
 
 const Pages = () => {
 	const dispatch   = useAppDispatch(),
@@ -44,7 +45,6 @@ const Pages = () => {
 					<Route path="forgot-password" element={<PublicOnlyRoute outlet={<PageForgot/>}/>}/>
 					<Route path="reset-password" element={<PublicOnlyRoute outlet={<PageReset/>}/>}/>
 					<Route path="feed" element={<FeedPage/>}/>
-					<Route path="/feed/:id" element={<Page404/>}/>
 					<Route path="profile" element={<ProtectedRoute  outlet={<PageProfile/>}/>}>
 						<Route path="orders" element={<ProtectedRoute  outlet={<PageProfile/>}/>}/>
 						<Route path="orders/:id" element={<ProtectedRoute  outlet={<PageProfile/>}/>}/>
@@ -57,6 +57,7 @@ const Pages = () => {
 			{background && (
 				<Routes>
 					<Route path="/ingredients/:ingredientId" element={<IngredientDetailsModal/>}/>
+					<Route path="/feed/:id" element={<FeedOrderDetailModal/>}/>
 				</Routes>
 			)}
 		</>

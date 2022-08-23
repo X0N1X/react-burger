@@ -2,8 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { root } from './reducers/root';
 import thunk from 'redux-thunk';
 
-import {socketMiddleware} from "./websocket";
-import {WSActions} from "./actions/ws";
+import { socketMiddleware } from "./websocket";
+import { WSActions } from "./actions/ws";
 
 const composeEnhancers =
 	// @ts-ignore
