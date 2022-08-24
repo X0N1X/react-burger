@@ -18,6 +18,9 @@ import App from '../components/app/app'
 import { checkAccessToken } from "../services/urls";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { FeedOrderDetailModal } from "../components/feed-order-detail/feed-order-delail-modal";
+import { ProfileOrders } from "./profile-orders";
+import {PageOrderDetail} from "./order-detail";
+
 
 const Pages = () => {
 	const dispatch   = useAppDispatch(),
@@ -45,12 +48,12 @@ const Pages = () => {
 					<Route path="forgot-password" element={<PublicOnlyRoute outlet={<PageForgot/>}/>}/>
 					<Route path="reset-password" element={<PublicOnlyRoute outlet={<PageReset/>}/>}/>
 					<Route path="feed" element={<FeedPage/>}/>
-					<Route path="profile" element={<ProtectedRoute  outlet={<PageProfile/>}/>}>
-						<Route path="orders" element={<ProtectedRoute  outlet={<PageProfile/>}/>}/>
-						<Route path="orders/:id" element={<ProtectedRoute  outlet={<PageProfile/>}/>}/>
-					</Route>
+					<Route path="profile/orders" element={<ProtectedRoute outlet={<ProfileOrders/>}/>}/>
+					<Route path="profile" element={<ProtectedRoute outlet={<PageProfile/>}/>}/>
 					<Route index element={<PageMain/>}/>
 					<Route path="/ingredients/:ingredientId" element={<PageIngredientDetail/>}/>
+					<Route path="/feed/:id" element={<PageOrderDetail isFeed={true}/>}/>
+					<Route path="/profile/orders/:id" element={<ProtectedRoute outlet={<PageOrderDetail isFeed={false}/>}/>}/>
 					<Route path="*" element={<Page404/>}/>
 				</Route>
 			</Routes>
@@ -58,6 +61,7 @@ const Pages = () => {
 				<Routes>
 					<Route path="/ingredients/:ingredientId" element={<IngredientDetailsModal/>}/>
 					<Route path="/feed/:id" element={<FeedOrderDetailModal/>}/>
+					<Route path="/profile/orders/:id" element={<ProtectedRoute outlet={<FeedOrderDetailModal/>}/>}/>
 				</Routes>
 			)}
 		</>

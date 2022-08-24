@@ -5,7 +5,7 @@ export const REQUEST = 'ORDER_REQUEST';
 export const SUCCESS = 'ORDER_SUCCESS';
 export const ERROR   = 'ORDER_ERROR';
 
-export const postOrder = (currentBurger:TBurger) => {
+export const postOrder = (currentBurger:TBurger, token:string) => {
 	return async (dispatch:any) => {
 		dispatch({type: REQUEST});
 
@@ -17,6 +17,7 @@ export const postOrder = (currentBurger:TBurger) => {
 		fetch(url, {
 			method: "POST",
 			headers: {
+				'authorization': `Bearer ${token}`,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({ingredients: ingredients})

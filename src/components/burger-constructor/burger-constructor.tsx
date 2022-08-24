@@ -9,7 +9,7 @@ import { ADD, RESET } from "../../services/actions/constructor";
 import { useDrop } from "react-dnd";
 import { INCREASE } from "../../services/actions/store";
 import { useNavigate } from "react-router-dom";
-import { checkAccessToken } from "../../services/urls";
+import { checkAccessToken, getCookie } from "../../services/urls";
 import { useAppSelector, useAppDispatch} from "../../hooks";
 import { TBurger } from "../../services/reducers/constuctor";
 import { TIngredient } from "../../types/types";
@@ -38,7 +38,7 @@ const BurgerConstructor = () => {
 	const openWin = () => {
 		if (isAuth && checkAccessToken()) {
 			setWinVisible(true);
-			dispatch(postOrder(currentBurger) as any);
+			dispatch(postOrder(currentBurger, getCookie('accessToken')) as any);
 		} else {
 			navigate("/login");
 		}

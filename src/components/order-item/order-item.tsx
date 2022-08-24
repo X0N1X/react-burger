@@ -8,7 +8,7 @@ import { v4 as idv4 } from "uuid";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { convertDate } from "../../utils/common";
 
-export const OrderItem : FC<TOrder> = ({_id, number, name, createdAt, ingredients, status, updatedAt}) => {
+export const OrderItem : FC<TOrder>= ({_id, number, name, createdAt, ingredients, status, updatedAt, profile}) => {
     const [price, setPrice] = useState(0);
     const location = useLocation();
     const raw:TIngredient[] = useAppSelector(state => state.store.raw);
@@ -27,7 +27,7 @@ export const OrderItem : FC<TOrder> = ({_id, number, name, createdAt, ingredient
     return (
         <section className={styles.item}>
             <Link className={styles.item}
-                  to    = {`/feed/${_id}`}
+                  to    = {profile ? `/profile/orders/${_id}` : `/feed/${_id}`}
                   state = {{background: location}}
             >
                 <div className={styles.header}>

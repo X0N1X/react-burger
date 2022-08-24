@@ -28,6 +28,7 @@ export type TOrder = {
 	createdAt:   string
 	updatedAt:   string
 	number:      number
+	profile?:    boolean
 }
 
 export const enum WSActionTypes {
