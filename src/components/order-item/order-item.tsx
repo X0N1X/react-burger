@@ -1,14 +1,12 @@
 import {FC, useEffect, useState} from "react";
 import styles from './order-item.module.css';
-import {TIngredient, TOrder} from "../../types/types";
-import {Link, useLocation} from "react-router-dom";
-import {useAppSelector} from "../../hooks";
-import {IngredientIcon} from "../ingredient-icon/ingredient-icon";
-import {v4 as idv4} from "uuid";
-import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-
-import { formatRelative } from 'date-fns';
-import { ru } from 'date-fns/locale';
+import { TIngredient, TOrder } from "../../types/types";
+import { Link, useLocation } from "react-router-dom";
+import { useAppSelector } from "../../hooks";
+import { IngredientIcon } from "../ingredient-icon/ingredient-icon";
+import { v4 as idv4 } from "uuid";
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { convertDate } from "../../utils/common";
 
 export const OrderItem : FC<TOrder> = ({_id, number, name, createdAt, ingredients, status, updatedAt}) => {
     const [price, setPrice] = useState(0);
@@ -25,12 +23,6 @@ export const OrderItem : FC<TOrder> = ({_id, number, name, createdAt, ingredient
             })
         })
     }, []);
-
-    const convertDate = (date: string) => {
-        return formatRelative(new Date(date), new Date(), {
-            locale: ru,
-        });
-    };
 
     return (
         <section className={styles.item}>

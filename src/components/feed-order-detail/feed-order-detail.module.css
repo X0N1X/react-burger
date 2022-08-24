@@ -1,46 +1,52 @@
-.orderName {
-	height: 26px;
+.name {
+	height:   26px;
 	overflow: hidden;
 }
+
 .status {
 	color: #00CCCC;
 }
-.ingredientsContainer {
+
+.list {
 	overflow-y: scroll;
-	height: 282px;
-}
-.bottom {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+	height:     282px;
 }
 
-.ingredientsContainerItem {
-	display: flex;
-	flex-direction: row;
+.bbar {
+	display:         flex;
+	flex-direction:  row;
+	justify-content: space-between;
+	align-items:     center;
+}
+
+.item {
+	display:         flex;
+	flex-direction:  row;
 	justify-content: space-between;
 }
-.ingredientsContainerItem img {
-	display: block;
-	position: relative;
-	width: 56px;
-	height: 56px;
-	position: relative;
-	border-radius: 50%;
+
+.item img {
+	display:          block;
+	position:         relative;
+	width:            56px;
+	height:           56px;
+	border-radius:    50%;
 	background-color: #1C1C21;
-	border: #4C4CFF solid 2px;
-	overflow: hidden;
+	border:           #4C4CFF solid 2px;
+	overflow:         hidden;
 }
-.ingredientsContainerItem .imgAndName {
-	display: flex;
+
+.item .row {
+	display:        flex;
 	flex-direction: row;
-	align-items: center;
+	align-items:    center;
 }
-.orderItemDate {
+
+.date {
 	color: #8585AD;
 }
+
 .price {
-	display: flex;
+	display:     flex;
 	align-items: center;
 }
