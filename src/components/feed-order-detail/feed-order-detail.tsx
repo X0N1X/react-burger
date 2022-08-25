@@ -48,7 +48,7 @@ export const FeedOrderDetail: FC = () => {
                     if (!someone) {
                         items.push({...ingredient, used:(ingredient.type === 'bun' ?  2  : 1)});
                         price += ingredient.price * (ingredient.type === 'bun' ?  2  : 1);
-                    } else {
+                    } else if (someone.type !== 'bun') {
                         someone.used = (someone.used || 0) + 1;
                         price += someone.price;
                     }

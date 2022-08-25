@@ -3,7 +3,6 @@ import { useEffect }                      from 'react';
 import { WSClose, WSStart }               from '../services/actions/ws';
 import styles                             from './feed.module.css';
 import { OrderItem }                      from '../components/order-item/order-item';
-import { v4 as idv4 }                     from 'uuid';
 
 export const FeedPage = () => {
     const dispatch = useAppDispatch();
@@ -26,7 +25,7 @@ export const FeedPage = () => {
                         {
                             orders?.map((order, index : number) => {
                                 return (
-                                    <OrderItem key={idv4()} {...order}/>
+                                    <OrderItem key={order._id} {...order}/>
                                 )
                             })
                         }
@@ -44,7 +43,7 @@ export const FeedPage = () => {
                                             if (index % 10 === 0) {}
                                             return (
                                                 order.status === "done"
-                                                && (<li key={idv4()}>{order.number}</li>)
+                                                && (<li key={order._id}>{order.number}</li>)
                                             )
                                         })
                                     }
@@ -57,7 +56,7 @@ export const FeedPage = () => {
                                         orders?.map(order => {
                                             return (
                                                 (order.status !== "done")
-                                                && (<li key={idv4()}>{order.number}</li>)
+                                                && (<li key={order._id}>{order.number}</li>)
                                             )
                                         })
                                     }
