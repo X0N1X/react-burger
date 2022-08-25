@@ -6,13 +6,13 @@ import { useAppDispatch, useAppSelector} from "../hooks";
 import { TOrder } from "../types/types";
 import { ProfileNavigation } from "../components/profile-navigation/profile-navigation";
 import { WSClose, WSStart } from "../services/actions/ws";
-import { getCookie } from "../services/urls";
+import { baseWsUrl, getCookie} from "../services/urls";
 
 export function ProfileOrders() {
     const dispatch = useAppDispatch();
     const { orders } = useAppSelector(store => store.ws);
     const accessToken = (getCookie('accessToken') as string).replace('Bearer ', '');
-    const wsUrl = 'wss://norma.nomoreparties.space/orders';
+    const wsUrl = baseWsUrl + '/orders';
     const url = accessToken ? `${wsUrl}?token=${accessToken}` : wsUrl;
 
     useEffect(() => {

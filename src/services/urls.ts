@@ -1,6 +1,7 @@
 import jwt_decode from "jwt-decode";
 
 export const baseUrl      = 'https://norma.nomoreparties.space/api';
+export const baseWsUrl    = 'wss://norma.nomoreparties.space';
 export const ingredients  = baseUrl + '/ingredients';
 export const order        = baseUrl + '/orders';
 export const registration = baseUrl + '/auth/register';

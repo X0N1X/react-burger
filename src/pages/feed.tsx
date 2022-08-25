@@ -3,6 +3,7 @@ import { useEffect }                      from 'react';
 import { WSClose, WSStart }               from '../services/actions/ws';
 import styles                             from './feed.module.css';
 import { OrderItem }                      from '../components/order-item/order-item';
+import { baseWsUrl }                      from "../services/urls";
 
 export const FeedPage = () => {
     const dispatch = useAppDispatch();
@@ -10,7 +11,7 @@ export const FeedPage = () => {
     const { orders, total, totalToday } = useAppSelector(store => store.ws);
 
     useEffect(() => {
-       dispatch(WSStart('wss://norma.nomoreparties.space/orders/all'));
+       dispatch(WSStart(baseWsUrl+'/orders/all'));
        return () => {
            dispatch(WSClose());
        }

@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import styles from './order-details.module.css';
 import { FeedOrderDetail } from "../components/feed-order-detail/feed-order-detail";
-import {WSClose, WSStart} from "../services/actions/ws";
-import {getCookie} from "../services/urls";
-import {useAppDispatch} from "../hooks";
+import { WSClose, WSStart } from "../services/actions/ws";
+import { baseWsUrl, getCookie } from "../services/urls";
+import { useAppDispatch } from "../hooks";
 
 export const PageOrderDetail = ({isFeed}:{isFeed?:boolean}) => {
 
@@ -11,11 +11,11 @@ export const PageOrderDetail = ({isFeed}:{isFeed?:boolean}) => {
 
     useEffect(() => {
         if (isFeed) {
-            dispatch(WSStart('wss://norma.nomoreparties.space/orders/all'));
+            dispatch(WSStart(baseWsUrl + 'orders/all'));
 
         } else {
             const accessToken = (getCookie('accessToken') as string).replace('Bearer ', '');
-            const wsUrl = 'wss://norma.nomoreparties.space/orders';
+            const wsUrl = baseWsUrl + '/orders';
             const url = accessToken ? `${wsUrl}?token=${accessToken}` : wsUrl;
             dispatch(WSStart(url));
         }
