@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import styles from './order-details.module.css';
 import { FeedOrderDetail } from "../components/feed-order-detail/feed-order-detail";
-import {useDispatch} from "react-redux";
 import {WSClose, WSStart} from "../services/actions/ws";
 import {getCookie} from "../services/urls";
+import {useAppDispatch} from "../hooks";
 
 export const PageOrderDetail = ({isFeed}:{isFeed?:boolean}) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (isFeed) {

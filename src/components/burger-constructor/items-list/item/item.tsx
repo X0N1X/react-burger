@@ -1,11 +1,11 @@
 import React, {useRef} from 'react';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './item.module.css'
-import { useDispatch } from "react-redux";
 import { DELETE, ORDER } from "../../../../services/actions/constructor";
 import { DECREASE } from "../../../../services/actions/store";
 import { useDrag, useDrop, DragObjectFactory } from "react-dnd";
-import {TIngredient} from "../../../../types/types";
+import { TIngredient } from "../../../../types/types";
+import { useAppDispatch } from "../../../../hooks";
 
 
 interface IItem {
@@ -15,7 +15,7 @@ interface IItem {
 
 const Item = ({ item, index }:IItem) => {
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const ref = useRef<HTMLHeadingElement>(null);
 
