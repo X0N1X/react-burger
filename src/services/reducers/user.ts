@@ -36,7 +36,7 @@ const initState: IUser = {
     patchHasError: false
 };
 
-export const user = ( state = initState, action:TAction) => {
+export const user = ( state = initState, action:TAction): IUser => {
     switch(action.type) {
 
         case SET:

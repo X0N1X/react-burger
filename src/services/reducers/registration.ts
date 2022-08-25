@@ -20,7 +20,7 @@ const initState:TRegistration = {
 	}
 };
 
-export const registration = (state = initState, action:TAction) => {
+export const registration = (state = initState, action:TAction): TRegistration => {
 	switch (action.type) {
 
 		case REQUEST:

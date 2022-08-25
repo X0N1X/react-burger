@@ -17,7 +17,8 @@ declare const Button1: React.FC<{
 
 export function PageForgot() {
     const titleCls = 'text text_type_main-large ' + styles.header;
-    const { email } = useAppSelector(state => state.password.forgotForm);
+    const { forgotForm } = useAppSelector(state => state.password);
+    const { email } = forgotForm;
     const { isAuth } = useAppSelector(state => state.user);
     const { forgotLoading, forgotSuccess } = useAppSelector(state => state.password);
     const dispatch = useAppDispatch();
@@ -36,7 +37,7 @@ export function PageForgot() {
 
     const submit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(passwordForgot() as any);
+        dispatch(passwordForgot(forgotForm));
     };
 
     if (isAuth) {

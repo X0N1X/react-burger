@@ -3,6 +3,7 @@ import { REQUEST, SUCCESS, ERROR, SET } from "../actions/login";
 type TLogin = {
 	loading:  boolean;
 	hasError: boolean;
+	auth:     boolean;
 	name:     string;
 	email:    string;
 	form: {
@@ -14,6 +15,7 @@ type TLogin = {
 const initState:TLogin = {
 	loading:  false,
 	hasError: false,
+	auth:     false,
 	name:     '',
 	email:    '',
 	form: {
@@ -22,7 +24,7 @@ const initState:TLogin = {
 	}
 };
 
-export const login = (state = initState, action:TAction) => {
+export const login = (state = initState, action:TAction): TLogin => {
 	switch (action.type) {
 
 		case REQUEST:

@@ -8,7 +8,8 @@ import { Link, Navigate } from 'react-router-dom';
 export function PageRegistration() {
     const titleCls = 'text text_type_main-large ' + styles.header;
 
-    const { name, email, password } = useAppSelector(state => state.registration.form);
+    const { form } = useAppSelector(state => state.registration);
+    const { name, email, password } = form;
 
     const { isAuth } = useAppSelector(state => state.user);
     const { loading } = useAppSelector(state => state.registration);
@@ -21,7 +22,7 @@ export function PageRegistration() {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(registration() as any);
+        dispatch(registration(form));
     };
 
     if (isAuth) {

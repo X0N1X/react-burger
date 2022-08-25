@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Navigate } from 'react-router-dom';
 import { LOGOUT, userLogout } from "../services/actions/user";
-import {useAppDispatch, useAppSelector} from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 
 export function PageLogout() {
 
@@ -10,7 +10,7 @@ export function PageLogout() {
     const { isAuth } = useAppSelector(state => state.user);
 
     useEffect(()=>{
-        isAuth && dispatch(userLogout() as any);
+        isAuth && dispatch(userLogout());
         dispatch({type:LOGOUT});
     }, [dispatch]);
 

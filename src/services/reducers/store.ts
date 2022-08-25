@@ -50,7 +50,7 @@ const getGroups = (store:TIngredient[]) => {
 	return groups;
 };
 
-export const store = (state = initState, action:TAction) => {
+export const store = (state = initState, action:TAction): IStore => {
 	switch (action.type) {
 		case REQUEST:
 			return {

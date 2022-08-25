@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware, compose, ActionCreator, Action} from 'redux';
+import {createStore, applyMiddleware, compose, ActionCreator, Action, Dispatch} from 'redux';
 import { root } from './reducers/root';
 import thunk, { ThunkAction } from 'redux-thunk';
 
@@ -20,9 +20,10 @@ const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(WSActi
 export const store = createStore(root, enhancer);
 
 export type TApplicationActions =
-	| TFeedOrderDetailActions
-	| TAction
+	TFeedOrderDetailActions |
+	TAction
 
 export type TRootState = ReturnType<typeof store.getState>
-export type TAppDispatch = typeof store.dispatch
-export type TAppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, TRootState, TApplicationActions>>;
+export type TAppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, TRootState, TApplicationActions>>
+export type TAppDispatch = Dispatch<TApplicationActions>
+export type TAppDispatchWithThunk = Dispatch<TApplicationActions> | TAppThunk

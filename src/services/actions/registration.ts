@@ -9,8 +9,8 @@ export const SET     = "REGISTRATION_SET";
 
 export const setRegistration = (field:string, value:string):TAction => ({type: SET, field, value});
 
-export const registration: TAppThunk = () => {
-	return async (dispatch:TAppDispatch , getState:any) => {
+export const registration: TAppThunk = (form) => {
+	return async (dispatch:TAppDispatch) => {
 		dispatch({type: REQUEST});
 		fetchWithRefreshToken(url, {
 			method: 'POST',
@@ -18,7 +18,7 @@ export const registration: TAppThunk = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(getState().registration.form),
+			body: JSON.stringify(form),
 		}).then((result) => {
 			if (result && result.success) {
 				const accessToken = result.accessToken.split("Bearer ")[1];

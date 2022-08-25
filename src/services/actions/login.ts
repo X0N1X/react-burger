@@ -9,8 +9,8 @@ export const SET     = 'LOGIN_SET';
 
 export const setLogin = (field:string, value:string):TAction  => ({type: SET, field, value});
 
-export const login: TAppThunk = () => {
-	return async (dispatch:TAppDispatch, getState:any) => {
+export const login: TAppThunk = (form) => {
+	return async (dispatch:TAppDispatch) => {
 		dispatch({type: REQUEST});
 		fetch(url, {
 			method:  'POST',
@@ -18,7 +18,7 @@ export const login: TAppThunk = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body:    JSON.stringify(getState().login.form),
+			body:    JSON.stringify(form),
 		}).then(checkResponse).then(result => {
 			if (result && result.success) {
 				let accessToken = result.accessToken.split("Bearer ")[1];

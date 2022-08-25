@@ -19,7 +19,7 @@ import { checkAccessToken } from "../services/urls";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { FeedOrderDetailModal } from "../components/feed-order-detail/feed-order-delail-modal";
 import { ProfileOrders } from "./profile-orders";
-import {PageOrderDetail} from "./order-detail";
+import { PageOrderDetail } from "./order-detail";
 
 
 const Pages = () => {
@@ -32,9 +32,9 @@ const Pages = () => {
 	const isAccessToken = checkAccessToken();
 
 	React.useEffect(() => {
-		dispatch(getIngredients() as any);
+		dispatch(getIngredients());
 		if (isAuth || isAccessToken) {
-			dispatch(getUser() as any);
+			dispatch(getUser());
 		}
 	}, [dispatch, isAccessToken, isAuth]);
 

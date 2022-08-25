@@ -37,8 +37,8 @@ export const getUser: TAppThunk = () => {
     }
 };
 
-export const patchUser: TAppThunk = () => {
-    return async (dispatch:TAppDispatch, getState:any) => {
+export const patchUser: TAppThunk = (profile) => {
+    return async (dispatch:TAppDispatch) => {
         dispatch({type: PATCH_REQUEST});
         fetchWithRefreshToken(userUrl, {
                 method: 'PATCH',
@@ -47,7 +47,7 @@ export const patchUser: TAppThunk = () => {
                     "Content-Type": "application/json",
                     'Authorization': "Bearer " + getCookie("accessToken"),
                 },
-                body: JSON.stringify(getState().user.profile),
+                body: JSON.stringify(profile),
             }
         ).then(result => {
             if (result && result.success) {

@@ -9,12 +9,11 @@ export function PageProfile() {
     const dispatch = useAppDispatch();
 
     useEffect(()=>{
-        dispatch(getUser() as any);
+        dispatch(getUser());
     },[dispatch]);
 
-    const { name, email, password } = useAppSelector(state => state.user.profile);
-
-    const { patchLoading } = useAppSelector(state => state.user);
+    const { profile, patchLoading } = useAppSelector(state => state.user);
+    const { name, email, password } = profile;
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setUser(e.target.name, e.target.value));
@@ -22,12 +21,12 @@ export function PageProfile() {
 
     const submit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(patchUser() as any);
+        dispatch(patchUser(profile));
     };
 
     const cancel = (e: SyntheticEvent) => {
         e.preventDefault();
-        dispatch(getUser() as any);
+        dispatch(getUser());
     };
 
     return (

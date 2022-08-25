@@ -1,5 +1,5 @@
 import { checkResponse, forgot as forgotUrl, reset as resetUrl } from "../urls";
-import { TAppThunk } from "../store";
+import {TAppDispatch, TAppThunk} from "../store";
 
 export const FORGOT_REQUEST = "PASSWORD_FORGOT_REQUEST";
 export const FORGOT_SUCCESS = "PASSWORD_FORGOT_SUCCESS";
@@ -14,8 +14,8 @@ export const RESET_SET     = "PASSWORD_RESET_SET";
 export const setPasswordForgot = (field:string, value:string):TAction => ({type: FORGOT_SET, field, value});
 export const setPasswordReset  = (field:string, value:string):TAction => ({type: RESET_SET,  field, value});
 
-export const passwordForgot: TAppThunk = () => {
-	return async (dispatch: any, getState: any) => {
+export const passwordForgot: TAppThunk = (forgotForm) => {
+	return async (dispatch: TAppDispatch) => {
 		dispatch({
 			type: FORGOT_REQUEST
 		});
@@ -25,7 +25,7 @@ export const passwordForgot: TAppThunk = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(getState().password.forgotForm),
+			body: JSON.stringify(forgotForm),
 		}).then(checkResponse).then(result => {
 			if(result && result.success) {
 				dispatch({
@@ -42,8 +42,8 @@ export const passwordForgot: TAppThunk = () => {
 	}
 };
 
-export const passwordReset: TAppThunk = () => {
-	return async (dispatch: any, getState: any) => {
+export const passwordReset: TAppThunk = (resetForm) => {
+	return async (dispatch: TAppDispatch) => {
 		dispatch({type: RESET_REQUEST});
 		fetch(resetUrl, {
 			method: 'POST',
@@ -51,7 +51,7 @@ export const passwordReset: TAppThunk = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(getState().password.resetForm),
+			body: JSON.stringify(resetForm),
 		}).then(checkResponse).then(result => {
 			if(result && result.success) {
 				dispatch({type: RESET_SUCCESS});

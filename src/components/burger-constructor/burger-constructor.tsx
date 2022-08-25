@@ -38,7 +38,7 @@ const BurgerConstructor = () => {
 	const openWin = () => {
 		if (isAuth && checkAccessToken()) {
 			setWinVisible(true);
-			dispatch(postOrder(currentBurger, getCookie('accessToken')) as any);
+			dispatch(postOrder(currentBurger, getCookie('accessToken')));
 		} else {
 			navigate("/login");
 		}
