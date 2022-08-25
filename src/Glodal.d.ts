@@ -11,7 +11,7 @@ declare module '*.css' {
     export = classNames;
 }
 
-declare type Action = {
+declare type TAction = {
     type: string;
     [name: string]: any;
 }

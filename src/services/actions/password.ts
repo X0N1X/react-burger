@@ -1,4 +1,5 @@
 import { checkResponse, forgot as forgotUrl, reset as resetUrl } from "../urls";
+import { TAppThunk } from "../store";
 
 export const FORGOT_REQUEST = "PASSWORD_FORGOT_REQUEST";
 export const FORGOT_SUCCESS = "PASSWORD_FORGOT_SUCCESS";
@@ -10,10 +11,10 @@ export const RESET_SUCCESS = "PASSWORD_RESET_SUCCESS";
 export const RESET_ERROR   = "PASSWORD_RESET_ERROR";
 export const RESET_SET     = "PASSWORD_RESET_SET";
 
-export const setPasswordForgot = (field:string, value:string):Action => ({type: FORGOT_SET, field, value});
-export const setPasswordReset  = (field:string, value:string):Action => ({type: RESET_SET,  field, value});
+export const setPasswordForgot = (field:string, value:string):TAction => ({type: FORGOT_SET, field, value});
+export const setPasswordReset  = (field:string, value:string):TAction => ({type: RESET_SET,  field, value});
 
-export const passwordForgot = () => {
+export const passwordForgot: TAppThunk = () => {
 	return async (dispatch: any, getState: any) => {
 		dispatch({
 			type: FORGOT_REQUEST
@@ -41,7 +42,7 @@ export const passwordForgot = () => {
 	}
 };
 
-export const passwordReset = () => {
+export const passwordReset: TAppThunk = () => {
 	return async (dispatch: any, getState: any) => {
 		dispatch({type: RESET_REQUEST});
 		fetch(resetUrl, {

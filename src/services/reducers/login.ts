@@ -22,7 +22,7 @@ const initState:TLogin = {
 	}
 };
 
-export const login = (state = initState, action:Action) => {
+export const login = (state = initState, action:TAction) => {
 	switch (action.type) {
 
 		case REQUEST:

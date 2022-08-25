@@ -12,7 +12,7 @@ const initState:TCurrentOrder = {
 	hasError:      false
 };
 
-export const order = (state = initState, action:Action) => {
+export const order = (state = initState, action:TAction) => {
 	switch (action.type) {
 
 		case REQUEST:

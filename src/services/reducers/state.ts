@@ -10,7 +10,7 @@ const initState:TState = {
 	group: 'bun'
 };
 
-export const state = (state = initState, action:Action) => {
+export const state = (state = initState, action:TAction) => {
 	switch (action.type) {
 		case CHANGE_GROUP:
 			return {...state, group:action.data};

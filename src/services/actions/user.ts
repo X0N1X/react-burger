@@ -1,5 +1,5 @@
 import { getCookie, deleteCookie, checkResponse, logout as logoutUrl, user as userUrl, fetchWithRefreshToken} from "../urls";
-import { AppDispatch } from "../store";
+import { TAppDispatch, TAppThunk } from "../store";
 
 export const GET_REQUEST = "USER_GET_REQUEST";
 export const GET_SUCCESS = "USER_GET_SUCCESS";
@@ -12,10 +12,10 @@ export const PATCH_ERROR   = "USER_PATCH_ERROR";
 
 export const LOGOUT = "USER_LOGOUT";
 
-export const setUser = (field:string, value:string) : Action => ({type: SET, field, value});
+export const setUser = (field:string, value:string) : TAction => ({type: SET, field, value});
 
-export const getUser = () => {
-    return async (dispatch:AppDispatch) => {
+export const getUser: TAppThunk = () => {
+    return async (dispatch:TAppDispatch) => {
         dispatch({type: GET_REQUEST});
         fetchWithRefreshToken(userUrl, {
             method: 'GET',
@@ -37,8 +37,8 @@ export const getUser = () => {
     }
 };
 
-export const patchUser = () => {
-    return async (dispatch:AppDispatch , getState:any) => {
+export const patchUser: TAppThunk = () => {
+    return async (dispatch:TAppDispatch, getState:any) => {
         dispatch({type: PATCH_REQUEST});
         fetchWithRefreshToken(userUrl, {
                 method: 'PATCH',
@@ -61,8 +61,8 @@ export const patchUser = () => {
     }
 };
 
-export const userLogout = () => {
-    return async (dispatch:AppDispatch) => {
+export const userLogout: TAppThunk = () => {
+    return async (dispatch:TAppDispatch) => {
         fetch(logoutUrl, {
             method: 'POST',
             mode:   'cors',

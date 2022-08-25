@@ -33,7 +33,7 @@ const initState:TPassword = {
 	}
 };
 
-export const password = (state = initState, action:Action) => {
+export const password = (state = initState, action:TAction) => {
 	switch (action.type) {
 
 		case FORGOT_REQUEST:

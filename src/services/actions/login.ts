@@ -1,16 +1,16 @@
 import { setCookie, checkResponse, login as url} from "../urls";
 import { GET_SUCCESS } from "./user";
-import { AppDispatch } from "../store";
+import {TAppDispatch, TAppThunk} from "../store";
 
 export const REQUEST = 'LOGIN_REQUEST';
 export const SUCCESS = 'LOGIN_SUCCESS';
 export const ERROR   = 'LOGIN_ERROR';
 export const SET     = 'LOGIN_SET';
 
-export const setLogin = (field:string, value:string):Action => ({type: SET, field, value});
+export const setLogin = (field:string, value:string):TAction  => ({type: SET, field, value});
 
-export const login = () => {
-	return async (dispatch:AppDispatch, getState:any) => {
+export const login: TAppThunk = () => {
+	return async (dispatch:TAppDispatch, getState:any) => {
 		dispatch({type: REQUEST});
 		fetch(url, {
 			method:  'POST',

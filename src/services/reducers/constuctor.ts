@@ -32,7 +32,7 @@ const move = (t:TIngredient[], i:number, y:number) => [
 	...t.slice(y<=i?i+1:y+1)
 ].filter(k=>k!==null);
 
-export const burger = (state = initState, action:Action) => {
+export const burger = (state = initState, action:TAction) => {
 	switch (action.type) {
 
 		case ADD:

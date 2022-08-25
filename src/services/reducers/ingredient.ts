@@ -10,7 +10,7 @@ const initState: TIngredientWindow = {
 	isVisible: false
 };
 
-export const ingredient = (state = initState, action:Action) => {
+export const ingredient = (state = initState, action:TAction) => {
 	switch (action.type) {
 		case OPEN:
 			return {
