@@ -30,7 +30,7 @@ const Item = ({ item, index }:IItem) => {
 			dispatch({
 				type: ORDER,
 				data: {
-					from: item.order,
+					from: item.index,
 					to:   index
 				}
 			} as any);

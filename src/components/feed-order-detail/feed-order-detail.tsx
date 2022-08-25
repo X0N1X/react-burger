@@ -24,21 +24,40 @@ export const FeedOrderDetail: FC = () => {
 
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
+    const items: TIngredient[] = [];
+
+    ingredients.forEach((item:TIngredient) => {
+        const found = items.find((i:TIngredient) => i._id === item._id);
+        if (!found) {
+            items.push({...item, used:1});
+        } else {
+            found.used = (found.used || 0) + 1;
+        }
+    });
+
     useEffect(() => {
         let items: TIngredient[] = [];
         let price = 0;
         if (order?.ingredients.length) {
             order.ingredients.forEach((id: string) => {
-                const found = raw.find((item: TIngredient) => item._id === id);
-                if (found) {
-                    items.push(found);
-                    price += found.price * (found.type === 'bun' ?  2  : 1);
+                const ingredient = raw.find((item: TIngredient) => item._id === id);
+
+                if (ingredient) {
+                    const someone = items.find((i:TIngredient) => i._id === ingredient._id);
+
+                    if (!someone) {
+                        items.push({...ingredient, used:(ingredient.type === 'bun' ?  2  : 1)});
+                        price += ingredient.price * (ingredient.type === 'bun' ?  2  : 1);
+                    } else {
+                        someone.used = (someone.used || 0) + 1;
+                        price += someone.price;
+                    }
                 }
             })
         }
         setIngredients(items);
         setTotalPrice(price);
-    },[order]);
+    }, [order]);
 
     return (
         <>
@@ -57,7 +76,7 @@ export const FeedOrderDetail: FC = () => {
                                             <div className='pr-4 pl-4 text text_type_main-default'>{ingredient.name}</div>
                                         </div>
                                         <div className={styles.row}>
-                                            <span className='pr-4'>{ingredient.type === 'bun' ? '2' : '1'} x {ingredient.price}</span>
+                                            <span className='pr-4'>{ingredient.used} x {ingredient.price}</span>
                                             <CurrencyIcon type="primary" />
                                         </div>
                                     </div>
