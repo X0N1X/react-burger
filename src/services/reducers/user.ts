@@ -59,7 +59,13 @@ export const user = ( state = initState, action:Action) => {
         case PATCH_REQUEST:
             return {...state, patchLoading: true,  patchHasError: false};
         case PATCH_SUCCESS:
-            return {...state, patchLoading: false, patchHasError: false, profile: {...initState.profile}};
+            return {
+                ...state,
+                patchLoading:  false,
+                patchHasError: false,
+                info:          {name: action.name, email: action.email},
+                profile:       {name: action.name, email: action.email, password: ''}
+            };
         case PATCH_ERROR:
             return {...state, patchLoading: false, patchHasError: true};
 

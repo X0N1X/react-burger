@@ -1,5 +1,6 @@
 import { setCookie, checkResponse, login as url} from "../urls";
 import { GET_SUCCESS } from "./user";
+import { AppDispatch } from "../store";
 
 export const REQUEST = 'LOGIN_REQUEST';
 export const SUCCESS = 'LOGIN_SUCCESS';
@@ -9,7 +10,7 @@ export const SET     = 'LOGIN_SET';
 export const setLogin = (field:string, value:string):Action => ({type: SET, field, value});
 
 export const login = () => {
-	return async (dispatch:any, getState:any) => {
+	return async (dispatch:AppDispatch, getState:any) => {
 		dispatch({type: REQUEST});
 		fetch(url, {
 			method:  'POST',

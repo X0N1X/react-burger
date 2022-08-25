@@ -1,5 +1,6 @@
 import { getUser  } from "./user";
 import { setCookie, checkResponse, registration as url, fetchWithRefreshToken } from "../urls";
+import { AppDispatch } from "../store";
 
 export const REQUEST = 'REGISTRATION_REQUEST';
 export const SUCCESS = 'REGISTRATION_SUCCESS';
@@ -9,7 +10,7 @@ export const SET     = "REGISTRATION_SET";
 export const setRegistration = (field:string, value:string):Action => ({type: SET, field, value});
 
 export const registration = () => {
-	return async (dispatch:any , getState:any) => {
+	return async (dispatch:AppDispatch , getState:any) => {
 		dispatch({type: REQUEST});
 		fetchWithRefreshToken(url, {
 			method: 'POST',
@@ -24,7 +25,6 @@ export const registration = () => {
 				setCookie("accessToken", accessToken, { path: '/' });
 				localStorage.setItem("refreshToken", result.refreshToken);
 
-				dispatch(getUser());
 				dispatch({
 					type: SUCCESS,
 				});

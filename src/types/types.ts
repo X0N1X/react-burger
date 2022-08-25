@@ -42,6 +42,17 @@ export const enum WSActionTypes {
 	WS_SEND    = 'WS_SEND_MESSAGE'
 }
 
+export type TWSActionTypes = {
+	WS_START:   string,
+	WS_STOP:    string,
+	WS_END:     string,
+	WS_SUCCESS: string,
+	WS_ERROR:   string,
+	WS_CLOSED:  string,
+	WS_GET:     string,
+	WS_SEND:    string
+}
+
 export interface IWSStart {
 	type:  WSActionTypes.WS_START;
 	wsUrl: string;

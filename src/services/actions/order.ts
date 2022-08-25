@@ -1,12 +1,13 @@
 import { checkResponse, order as url } from "../urls";
 import { TBurger } from "../reducers/constuctor";
+import { AppDispatch } from "../store";
 
 export const REQUEST = 'ORDER_REQUEST';
 export const SUCCESS = 'ORDER_SUCCESS';
 export const ERROR   = 'ORDER_ERROR';
 
 export const postOrder = (currentBurger:TBurger, token:string) => {
-	return async (dispatch:any) => {
+	return async (dispatch:AppDispatch) => {
 		dispatch({type: REQUEST});
 
 		const ingredients = (currentBurger?.ingredients &&
