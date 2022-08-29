@@ -44,7 +44,7 @@ export const OrderItem : FC<TOrder>= ({_id, number, name, createdAt, ingredients
                                 const zIndex = ingredients.length - index,
                                     last = index === 5;
                                 return index <= 5 && <IngredientIcon
-                                    key               = {idv4()}
+                                    key               = {index}
                                     style             = {{zIndex : zIndex}}
                                     ingredientId      = {ingredientId}
                                     last              = {last}

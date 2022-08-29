@@ -70,7 +70,7 @@ export const FeedOrderDetail: FC = () => {
                         {
                             ingredients.map((ingredient: TIngredient) => {
                                 return (
-                                    <div key={ idv4()} className={styles.item + ' pb-4'}>
+                                    <div key={ingredient._id} className={styles.item + ' pb-4'}>
                                         <div className={styles.row}>
                                             <img src={ingredient.image} alt="" />
                                             <div className='pr-4 pl-4 text text_type_main-default'>{ingredient.name}</div>

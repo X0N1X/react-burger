@@ -33,7 +33,7 @@ export function ProfileOrders() {
                             orders ?
                             orders.map((order:TOrder) => {
                                 return (
-                                    <OrderItem key={idv4()} {...order} profile={true}/>
+                                    <OrderItem key={order._id} {...order} profile={true}/>
                                 )
                             }) : ('Вы еще не сделали ни одного заказа')
                         }
