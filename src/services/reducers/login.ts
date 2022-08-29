@@ -1,19 +1,23 @@
 import { REQUEST, SUCCESS, ERROR, SET } from "../actions/login";
 
+export type TLoginForm = {
+	password: string;
+	email:    string;
+}
+
 type TLogin = {
 	loading:  boolean;
 	hasError: boolean;
+	auth:     boolean;
 	name:     string;
 	email:    string;
-	form: {
-		password: string;
-		email:    string;
-	}
+	form:     TLoginForm
 }
 
 const initState:TLogin = {
 	loading:  false,
 	hasError: false,
+	auth:     false,
 	name:     '',
 	email:    '',
 	form: {
@@ -22,7 +26,7 @@ const initState:TLogin = {
 	}
 };
 
-export const login = (state = initState, action:Action) => {
+export const login = (state = initState, action:TAction): TLogin => {
 	switch (action.type) {
 
 		case REQUEST:

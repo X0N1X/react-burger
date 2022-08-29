@@ -1,6 +1,7 @@
 import jwt_decode from "jwt-decode";
 
 export const baseUrl      = 'https://norma.nomoreparties.space/api';
+export const baseWsUrl    = 'wss://norma.nomoreparties.space';
 export const ingredients  = baseUrl + '/ingredients';
 export const order        = baseUrl + '/orders';
 export const registration = baseUrl + '/auth/register';
@@ -42,7 +43,7 @@ export function getCookie(name: string) {
 	const matches = document.cookie.match(
 		new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[]\\\/+^])/g, '\\$1') + '=([^;]*)')
 	);
-	return matches ? decodeURIComponent(matches[1]) : undefined;
+	return matches ? decodeURIComponent(matches[1]) : '';
 }
 
 export function deleteCookie(name: string) {

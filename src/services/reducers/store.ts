@@ -1,9 +1,10 @@
 import {REQUEST, SUCCESS, ERROR, INCREASE, DECREASE } from '../actions/store'
-import { TGroup, TIngregient } from "../../types/types";
+import { RESET } from '../actions/constructor'
+import { TGroup, TIngredient } from "../../types/types";
 
 export interface IStore {
 	store:      TGroup[];
-	raw:        TIngregient[];
+	raw:        TIngredient[];
 	loading:    boolean;
 	hasError:   boolean;
 }
@@ -15,7 +16,7 @@ const initState: IStore = {
 	hasError:   false
 };
 
-const getGroups = (store:TIngregient[]) => {
+const getGroups = (store:TIngredient[]) => {
 	const groups: TGroup[] = [];
 
 	store.forEach(item => {
@@ -50,7 +51,7 @@ const getGroups = (store:TIngregient[]) => {
 	return groups;
 };
 
-export const store = (state = initState, action:Action) => {
+export const store = (state = initState, action:TAction): IStore => {
 	switch (action.type) {
 		case REQUEST:
 			return {
@@ -110,6 +111,13 @@ export const store = (state = initState, action:Action) => {
 						}})
 				};
 			}
+		case RESET:
+			return {
+				...state,
+				store: state.store.map((group) => {
+					return {...group, children: group.children.map((item)=>{return {...item, used:0}})}
+				})
+			};
 		default:
 			return state;
 	}

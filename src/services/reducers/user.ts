@@ -1,12 +1,14 @@
 import {LOGOUT, SET, GET_REQUEST, GET_ERROR, GET_SUCCESS, PATCH_ERROR, PATCH_REQUEST, PATCH_SUCCESS} from "../actions/user";
 
+export type TProfile = {
+    name:     string;
+    email:    string;
+    password: string;
+}
+
 export interface IUser {
-    isAuth: boolean;
-    profile: {
-        name:     string;
-        email:    string;
-        password: string;
-    };
+    isAuth:  boolean;
+    profile: TProfile;
     info: {
         name:  string;
         email: string;
@@ -36,7 +38,7 @@ const initState: IUser = {
     patchHasError: false
 };
 
-export const user = ( state = initState, action:Action) => {
+export const user = ( state = initState, action:TAction): IUser => {
     switch(action.type) {
 
         case SET:
@@ -59,7 +61,13 @@ export const user = ( state = initState, action:Action) => {
         case PATCH_REQUEST:
             return {...state, patchLoading: true,  patchHasError: false};
         case PATCH_SUCCESS:
-            return {...state, patchLoading: false, patchHasError: false, profile: {...initState.profile}};
+            return {
+                ...state,
+                patchLoading:  false,
+                patchHasError: false,
+                info:          {name: action.name, email: action.email},
+                profile:       {name: action.name, email: action.email, password: ''}
+            };
         case PATCH_ERROR:
             return {...state, patchLoading: false, patchHasError: true};
 

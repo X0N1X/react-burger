@@ -1,0 +1,66 @@
+.name {
+	height:   26px;
+	overflow: hidden;
+}
+
+.status {
+	color: #00CCCC;
+}
+
+.list {
+	overflow-y: scroll;
+	height:     282px;
+}
+
+.list::-webkit-scrollbar {
+	width: 12px;
+}
+
+.list::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+	background: #5858AD;
+	border:     3px solid #8585AD;
+	box-sizing: border-box;
+}
+
+.bbar {
+	display:         flex;
+	flex-direction:  row;
+	justify-content: space-between;
+	align-items:     center;
+}
+
+.item {
+	display:         flex;
+	flex-direction:  row;
+	justify-content: space-between;
+}
+
+.item img {
+	display:          block;
+	position:         relative;
+	width:            56px;
+	height:           56px;
+	border-radius:    50%;
+	background-color: #1C1C21;
+	border:           #4C4CFF solid 2px;
+	overflow:         hidden;
+}
+
+.item .row {
+	display:        flex;
+	flex-direction: row;
+	align-items:    center;
+}
+
+.date {
+	color: #8585AD;
+}
+
+.price {
+	display:     flex;
+	align-items: center;
+}

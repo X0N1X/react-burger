@@ -1,0 +1,47 @@
+.page{
+	text-align: left;
+}
+
+.panel {
+	display: flex;
+	gap: 60px;
+	text-align: left;
+	width: 100vh;
+}
+.list {
+	width: 50%;
+}
+
+.orders::-webkit-scrollbar {
+	background-color: darkgrey;
+	width: 10px;
+}
+
+.orders::-webkit-scrollbar-track {
+	background-color: #2F2F37;
+}
+
+.orders::-webkit-scrollbar-thumb {
+	background-color: #8585AD;
+}
+
+.orders::-webkit-scrollbar-thumb:hover {
+	background-color: #9898c4;
+}
+
+.orders {
+	height: calc(100vh - 220px);
+	overflow-y: scroll;
+}
+.order_status {
+	display: flex;
+	gap: 36px;
+}
+.order_status .done_status {
+	color: #00CCCC;
+}
+.order_numbers {
+	column-count: 2;
+	column-gap: 8px;
+}
+

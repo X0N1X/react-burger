@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styles from './ingredients-details.module.css';
 import { useAppSelector } from "../../hooks";
 import { useParams } from 'react-router-dom';
-import {TIngregient} from "../../types/types";
+import {TIngredient} from "../../types/types";
 
 
 const IngredientDetails = () => {
@@ -11,7 +11,7 @@ const IngredientDetails = () => {
 		  nameCls   = styles.name + ' text text_type_main-default';
 
 	const { ingredientId } = useParams();
-	const ingredients:TIngregient[] = useAppSelector(state => state.store.raw);
+	const ingredients:TIngredient[] = useAppSelector(state => state.store.raw);
 	const ingredient = useMemo(() => (
 		ingredients.find(item => item._id === ingredientId)
 	), [ingredients, ingredientId]);

@@ -1,4 +1,6 @@
 import { checkResponse, forgot as forgotUrl, reset as resetUrl } from "../urls";
+import { TAppDispatch, TAppThunk } from "../store";
+import { TForgotForm, TResetForm } from "../reducers/password";
 
 export const FORGOT_REQUEST = "PASSWORD_FORGOT_REQUEST";
 export const FORGOT_SUCCESS = "PASSWORD_FORGOT_SUCCESS";
@@ -10,11 +12,11 @@ export const RESET_SUCCESS = "PASSWORD_RESET_SUCCESS";
 export const RESET_ERROR   = "PASSWORD_RESET_ERROR";
 export const RESET_SET     = "PASSWORD_RESET_SET";
 
-export const setPasswordForgot = (field:string, value:string):Action => ({type: FORGOT_SET, field, value});
-export const setPasswordReset  = (field:string, value:string):Action => ({type: RESET_SET,  field, value});
+export const setPasswordForgot = (field:string, value:string):TAction => ({type: FORGOT_SET, field, value});
+export const setPasswordReset  = (field:string, value:string):TAction => ({type: RESET_SET,  field, value});
 
-export const passwordForgot = () => {
-	return async (dispatch: any, getState: any) => {
+export const passwordForgot: TAppThunk = (forgotForm:TForgotForm) => {
+	return async (dispatch: TAppDispatch) => {
 		dispatch({
 			type: FORGOT_REQUEST
 		});
@@ -24,7 +26,7 @@ export const passwordForgot = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(getState().password.forgotForm),
+			body: JSON.stringify(forgotForm),
 		}).then(checkResponse).then(result => {
 			if(result && result.success) {
 				dispatch({
@@ -41,8 +43,8 @@ export const passwordForgot = () => {
 	}
 };
 
-export const passwordReset = () => {
-	return async (dispatch: any, getState: any) => {
+export const passwordReset: TAppThunk = (resetForm:TResetForm) => {
+	return async (dispatch: TAppDispatch) => {
 		dispatch({type: RESET_REQUEST});
 		fetch(resetUrl, {
 			method: 'POST',
@@ -50,7 +52,7 @@ export const passwordReset = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(getState().password.resetForm),
+			body: JSON.stringify(resetForm),
 		}).then(checkResponse).then(result => {
 			if(result && result.success) {
 				dispatch({type: RESET_SUCCESS});

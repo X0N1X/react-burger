@@ -9,7 +9,8 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 
 export function PageLogin() {
     const titleCls = 'text text_type_main-large ' + styles.header;
-    const { email, password } = useAppSelector(state => state.login.form);
+    const { form } = useAppSelector(state => state.login);
+    const { email, password } = form;
 
     const { isAuth } = useAppSelector(state => state.user);
     const { loading } = useAppSelector(state => state.login);
@@ -26,7 +27,7 @@ export function PageLogin() {
 
     const submit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(login() as any);
+        dispatch(login(form));
     };
 
     if (isAuth || isAccessToken) {

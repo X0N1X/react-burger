@@ -6,11 +6,13 @@ import { useAppSelector, useAppDispatch } from "../hooks";
 import { passwordReset, setPasswordReset } from '../services/actions/password';
 import { Link, Navigate } from 'react-router-dom';
 
+
 export function PageReset() {
 
     const titleCls = 'text text_type_main-large ' + styles.header;
 
-    const { password, token } = useAppSelector(state => state.password.resetForm);
+    const { resetForm } = useAppSelector(state => state.password);
+    const { password, token } = resetForm;
     const { isAuth } = useAppSelector(state => state.user);
     const { resetLoading, resetSuccess, forgotSuccess } = useAppSelector(state => state.password);
     const dispatch = useAppDispatch();
@@ -21,7 +23,7 @@ export function PageReset() {
 
     const submit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(passwordReset() as any)
+        dispatch(passwordReset(resetForm));
     };
 
     if (isAuth) {

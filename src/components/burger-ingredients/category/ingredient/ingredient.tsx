@@ -1,12 +1,12 @@
 import React from 'react';
-import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './ingredient.module.css';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from 'react-router-dom';
-import {TIngregient} from "../../../../types/types";
+import { TIngredient } from "../../../../types/types";
 
 export interface IIngredient {
-	item:  TIngregient & {
+	item:  TIngredient & {
 		used?: number;
 	}
 }

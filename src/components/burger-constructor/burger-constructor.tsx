@@ -9,10 +9,11 @@ import { ADD, RESET } from "../../services/actions/constructor";
 import { useDrop } from "react-dnd";
 import { INCREASE } from "../../services/actions/store";
 import { useNavigate } from "react-router-dom";
-import { checkAccessToken } from "../../services/urls";
+import { checkAccessToken, getCookie } from "../../services/urls";
 import { useAppSelector, useAppDispatch} from "../../hooks";
 import { TBurger } from "../../services/reducers/constuctor";
-import { TIngregient } from "../../types/types";
+import { TIngredient } from "../../types/types";
+import { v4 as idv4 } from 'uuid';
 
 const BurgerConstructor = () => {
 	const dispatch = useAppDispatch(),
@@ -38,7 +39,7 @@ const BurgerConstructor = () => {
 	const openWin = () => {
 		if (isAuth && checkAccessToken()) {
 			setWinVisible(true);
-			dispatch(postOrder(currentBurger) as any);
+			dispatch(postOrder(currentBurger, getCookie('accessToken')));
 		} else {
 			navigate("/login");
 		}
@@ -58,7 +59,8 @@ const BurgerConstructor = () => {
 		drop (item) {
 			dispatch({
 				type: ADD,
-				data: item
+				data: item,
+				uuid: idv4()
 			});
 			dispatch({
 				type: INCREASE,
@@ -71,7 +73,7 @@ const BurgerConstructor = () => {
 		currentBurger && (currentBurger.bun || currentBurger.ingredients.length) ?
 			<div className={styles.panel} ref={dropTarget}>
 				<ItemsList
-					bun={currentBurger.bun as TIngregient}
+					bun={currentBurger.bun as TIngredient}
 					ingredients={currentBurger.ingredients}
 				/>
 

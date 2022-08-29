@@ -1,12 +1,13 @@
 import { checkResponse, order as url } from "../urls";
 import { TBurger } from "../reducers/constuctor";
+import { TAppDispatch, TAppThunk } from "../store";
 
 export const REQUEST = 'ORDER_REQUEST';
 export const SUCCESS = 'ORDER_SUCCESS';
 export const ERROR   = 'ORDER_ERROR';
 
-export const postOrder = (currentBurger:TBurger) => {
-	return async (dispatch:any) => {
+export const postOrder: TAppThunk = (currentBurger:TBurger, token:string)  => {
+	return async (dispatch:TAppDispatch) => {
 		dispatch({type: REQUEST});
 
 		const ingredients = (currentBurger?.ingredients &&
@@ -17,6 +18,7 @@ export const postOrder = (currentBurger:TBurger) => {
 		fetch(url, {
 			method: "POST",
 			headers: {
+				'authorization': `Bearer ${token}`,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({ingredients: ingredients})

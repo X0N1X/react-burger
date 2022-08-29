@@ -1,9 +1,9 @@
 import { ADD, DELETE, RESET, ORDER } from '../actions/constructor'
-import {TIngregient} from "../../types/types";
+import {TIngredient} from "../../types/types";
 
 export type TBurger = {
-	bun: TIngregient | null,
-	ingredients: TIngregient[];
+	bun: TIngredient | null,
+	ingredients: TIngredient[];
 }
 
 export type TCurrentBurger = {
@@ -24,7 +24,7 @@ const initState:TCurrentBurger = {
  * @param y - индекс куда
  * @return {*[]}
  */
-const move = (t:TIngregient[], i:number, y:number) => [
+const move = (t:TIngredient[], i:number, y:number) => [
 	...t.slice(0,y<=i?y:i),
 	y<=i?t[i]:null,
 	...t.slice(y<=i?y:i+1,y<=i?i:y+1),
@@ -32,7 +32,7 @@ const move = (t:TIngregient[], i:number, y:number) => [
 	...t.slice(y<=i?i+1:y+1)
 ].filter(k=>k!==null);
 
-export const burger = (state = initState, action:Action) => {
+export const burger = (state = initState, action:TAction) => {
 	switch (action.type) {
 
 		case ADD:
@@ -48,7 +48,7 @@ export const burger = (state = initState, action:Action) => {
 					...state,
 					currentBurger: {
 						...state.currentBurger,
-						ingredients: [...state.currentBurger.ingredients, action.data]
+						ingredients: [...state.currentBurger.ingredients, {...action.data, uuid:action.uuid}]
 					}
 				}
 			}

@@ -1,4 +1,6 @@
 import { getCookie, deleteCookie, checkResponse, logout as logoutUrl, user as userUrl, fetchWithRefreshToken} from "../urls";
+import { TAppDispatch, TAppThunk } from "../store";
+import { TProfile } from "../reducers/user";
 
 export const GET_REQUEST = "USER_GET_REQUEST";
 export const GET_SUCCESS = "USER_GET_SUCCESS";
@@ -11,10 +13,10 @@ export const PATCH_ERROR   = "USER_PATCH_ERROR";
 
 export const LOGOUT = "USER_LOGOUT";
 
-export const setUser = (field:string, value:string) : Action => ({type: SET, field, value});
+export const setUser = (field:string, value:string) : TAction => ({type: SET, field, value});
 
-export const getUser = () => {
-    return async (dispatch:any) => {
+export const getUser: TAppThunk = () => {
+    return async (dispatch:TAppDispatch) => {
         dispatch({type: GET_REQUEST});
         fetchWithRefreshToken(userUrl, {
             method: 'GET',
@@ -36,8 +38,8 @@ export const getUser = () => {
     }
 };
 
-export const patchUser = () => {
-    return async (dispatch:any , getState:any) => {
+export const patchUser: TAppThunk = (profile:TProfile) => {
+    return async (dispatch:TAppDispatch) => {
         dispatch({type: PATCH_REQUEST});
         fetchWithRefreshToken(userUrl, {
                 method: 'PATCH',
@@ -46,12 +48,11 @@ export const patchUser = () => {
                     "Content-Type": "application/json",
                     'Authorization': "Bearer " + getCookie("accessToken"),
                 },
-                body: JSON.stringify(getState().user.profile),
+                body: JSON.stringify(profile),
             }
         ).then(result => {
             if (result && result.success) {
-                dispatch({type: PATCH_SUCCESS});
-                dispatch(getUser());
+                dispatch({type:  PATCH_SUCCESS, name:result.user.name, email:result.user.email});
             } else {
                 dispatch({type: PATCH_ERROR});
             }
@@ -61,8 +62,8 @@ export const patchUser = () => {
     }
 };
 
-export const userLogout = () => {
-    return async (dispatch:any) => {
+export const userLogout: TAppThunk = () => {
+    return async (dispatch:TAppDispatch) => {
         fetch(logoutUrl, {
             method: 'POST',
             mode:   'cors',

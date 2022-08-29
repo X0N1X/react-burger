@@ -6,6 +6,7 @@ import { PageLogout} from "./logout";
 import { PageProfile } from "./profile";
 import { PageReset } from "./reset";
 import { PageForgot } from "./forgot";
+import { FeedPage} from "./feed";
 import { Page404 } from "./404";
 import { PageIngredientDetail } from "./ingredient-detail";
 import { getIngredients } from "../services/actions/store";
@@ -16,6 +17,10 @@ import IngredientDetailsModal from "../components/ingredients-details/ingredient
 import App from '../components/app/app'
 import { checkAccessToken } from "../services/urls";
 import { useAppDispatch, useAppSelector } from "../hooks";
+import { FeedOrderDetailModal } from "../components/feed-order-detail/feed-order-delail-modal";
+import { ProfileOrders } from "./profile-orders";
+import { PageOrderDetail } from "./order-detail";
+
 
 const Pages = () => {
 	const dispatch   = useAppDispatch(),
@@ -27,9 +32,9 @@ const Pages = () => {
 	const isAccessToken = checkAccessToken();
 
 	React.useEffect(() => {
-		dispatch(getIngredients() as any);
+		dispatch(getIngredients());
 		if (isAuth || isAccessToken) {
-			dispatch(getUser() as any);
+			dispatch(getUser());
 		}
 	}, [dispatch, isAccessToken, isAuth]);
 
@@ -42,17 +47,21 @@ const Pages = () => {
 					<Route path="register" element={<PublicOnlyRoute outlet={<PageRegistration/>}/>}/>
 					<Route path="forgot-password" element={<PublicOnlyRoute outlet={<PageForgot/>}/>}/>
 					<Route path="reset-password" element={<PublicOnlyRoute outlet={<PageReset/>}/>}/>
-					<Route path="profile" element={<ProtectedRoute  outlet={<PageProfile/>}/>}>
-						<Route path="orders" element={<Page404/>}/>
-					</Route>
+					<Route path="feed" element={<FeedPage/>}/>
+					<Route path="profile/orders" element={<ProtectedRoute outlet={<ProfileOrders/>}/>}/>
+					<Route path="profile" element={<ProtectedRoute outlet={<PageProfile/>}/>}/>
 					<Route index element={<PageMain/>}/>
 					<Route path="/ingredients/:ingredientId" element={<PageIngredientDetail/>}/>
+					<Route path="/feed/:id" element={<PageOrderDetail isFeed={true}/>}/>
+					<Route path="/profile/orders/:id" element={<ProtectedRoute outlet={<PageOrderDetail isFeed={false}/>}/>}/>
 					<Route path="*" element={<Page404/>}/>
 				</Route>
 			</Routes>
 			{background && (
 				<Routes>
 					<Route path="/ingredients/:ingredientId" element={<IngredientDetailsModal/>}/>
+					<Route path="/feed/:id" element={<FeedOrderDetailModal/>}/>
+					<Route path="/profile/orders/:id" element={<ProtectedRoute outlet={<FeedOrderDetailModal/>}/>}/>
 				</Routes>
 			)}
 		</>

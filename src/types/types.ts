@@ -1,4 +1,4 @@
-export type TIngregient = {
+export type TIngredient = {
 	_id:           string;
 	name:          string;
 	type:          string;
@@ -12,60 +12,82 @@ export type TIngregient = {
 	image_large:   string;
 	__v:           number;
 	used?:         number;
+	uuid?:         string;
 };
 
 export type TGroup = {
 	text:     string;
  	name:     string;
- 	children: TIngregient[];
+ 	children: TIngredient[];
 }
 
-// import { shape, number, string, arrayOf } from 'prop-types';
-//
-// /**
-//  * Определение типа данных "ингредиент"
-//  * @type {Requireable<InferProps<{
-//  * 		image: Validator<NonNullable<string>>,
-//  * 		price: Validator<NonNullable<number>>,
-//  * 		name: Validator<NonNullable<string>>,
-//  * 		_id: Validator<NonNullable<string>>}
-//  * 	>>}
-//  */
-// export const ingredient = shape({
-// 	name:  string.isRequired,
-// 	price: number.isRequired,
-// 	image: string.isRequired,
-// 	used:  number.isRequired,
-// 	_id:   string.isRequired
-// });
-//
-// /**
-//  * Определение типа данных "бургер"
-//  * @type {Requireable<InferProps<{
-//  * 		total: Validator<NonNullable<number>>,
-//  * 		ingredients: Validator<NonNullable<any[]>>,
-//  * 		bun: Validator<NonNullable<T>>}
-//  * 	>>}
-//  */
-// export const burger = shape({
-// 	bun:         ingredient.isRequired,
-// 	ingredients: arrayOf(ingredient).isRequired
-// });
-//
-// /**
-//  * Определение типа данных "категория ингредиентов"
-//  * @type {Requireable<InferProps<{
-//  * 		children: Requireable<InferProps<{
-//  * 			image: Validator<NonNullable<string>>,
-//  * 			price: Validator<NonNullable<number>>,
-//  * 			name: Validator<NonNullable<string>>,
-//  * 			_id: Validator<NonNullable<string>>
-//  * 		}>>,
-//  * 		text: Validator<NonNullable<T>>}
-//  * 	>>}
-//  */
-// export const group = shape({
-// 	text:     string.isRequired,
-// 	name:     string.isRequired,
-// 	children: arrayOf(ingredient).isRequired
-// });
+export type TOrder = {
+	_id:         string
+	status:      'created' | 'done' | 'pending'
+	ingredients: Array<string>
+	name:        string
+	createdAt:   string
+	updatedAt:   string
+	number:      number
+	profile?:    boolean
+}
+
+export const enum WSActionTypes {
+	WS_START   = 'WS_CONNECTION_START',
+	WS_STOP    = 'WS_CONNECTION_STOP',
+	WS_END     = 'WS_CONNECTION_END',
+	WS_SUCCESS = 'WS_CONNECTION_SUCCESS',
+	WS_ERROR   = 'WS_CONNECTION_ERROR',
+	WS_CLOSED  = 'WS_CONNECTION_CLOSED',
+	WS_GET     = 'WS_GET_MESSAGE',
+	WS_SEND    = 'WS_SEND_MESSAGE'
+}
+
+export type TWSActionTypes = {
+	WS_START:   string,
+	WS_STOP:    string,
+	WS_END:     string,
+	WS_SUCCESS: string,
+	WS_ERROR:   string,
+	WS_CLOSED:  string,
+	WS_GET:     string,
+	WS_SEND:    string
+}
+
+export interface IWSStart {
+	type:  WSActionTypes.WS_START;
+	wsUrl: string;
+}
+export interface IWSClose {
+	type: WSActionTypes.WS_END;
+}
+export interface IWSClosed {
+	type:    WSActionTypes.WS_CLOSED;
+	payload: any;
+}
+export interface IWSSuccess {
+	type:    WSActionTypes.WS_SUCCESS;
+	payload: any;
+}
+export interface IWSError {
+	type:    WSActionTypes.WS_ERROR;
+	payload: any;
+}
+
+export interface IWSGet {
+	type:    WSActionTypes.WS_GET;
+	payload: any;
+}
+export interface IWSSend {
+	type:    WSActionTypes.WS_SEND;
+	payload: any;
+}
+
+export type TWSActions =
+	IWSStart |
+	IWSClose |
+	IWSSuccess |
+	IWSError |
+	IWSClosed |
+	IWSGet |
+	IWSSend;

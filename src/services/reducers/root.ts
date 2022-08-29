@@ -8,6 +8,8 @@ import { login }           from './login';
 import { registration }    from './registration';
 import { password }        from './password';
 import { user }            from './user';
+import { ws }              from './ws';
+import { feedOrderDetail } from './feedOrderDetail';
 
 export const root = combineReducers({
 	state,
@@ -18,5 +20,7 @@ export const root = combineReducers({
 	login,
 	registration,
 	password,
-	user
+	user,
+	ws,
+	feedOrderDetail
 });

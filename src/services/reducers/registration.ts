@@ -1,13 +1,15 @@
 import { REQUEST, SUCCESS, ERROR, SET } from "../actions/registration";
 
+export type TRegForm = {
+	name:     string;
+	email:    string;
+	password: string;
+}
+
 type TRegistration = {
 	loading:  boolean;
 	hasError: boolean;
-	form: {
-		name:     string;
-		email:    string;
-		password: string;
-	}
+	form:     TRegForm;
 };
 
 const initState:TRegistration = {
@@ -20,7 +22,7 @@ const initState:TRegistration = {
 	}
 };
 
-export const registration = (state = initState, action:Action) => {
+export const registration = (state = initState, action:TAction): TRegistration => {
 	switch (action.type) {
 
 		case REQUEST:
