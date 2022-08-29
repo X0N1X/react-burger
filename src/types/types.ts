@@ -12,6 +12,7 @@ export type TIngredient = {
 	image_large:   string;
 	__v:           number;
 	used?:         number;
+	uuid?:         string;
 };
 
 export type TGroup = {

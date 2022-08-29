@@ -48,7 +48,7 @@ export const burger = (state = initState, action:TAction) => {
 					...state,
 					currentBurger: {
 						...state.currentBurger,
-						ingredients: [...state.currentBurger.ingredients, action.data]
+						ingredients: [...state.currentBurger.ingredients, {...action.data, uuid:action.uuid}]
 					}
 				}
 			}

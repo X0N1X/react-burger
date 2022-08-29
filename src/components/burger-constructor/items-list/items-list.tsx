@@ -26,7 +26,7 @@ const ItemsList = ({ bun, ingredients }:TItemsList) => {
 			}
 			{ingredients &&
 				<div className={styles.items}>
-					{ingredients.map((item, index) => <Item key={index} item={item} index={index}/>)}
+					{ingredients.map((item, index) => <Item key={item.uuid} item={item} index={index}/>)}
 				</div>
 			}
 			{bun &&

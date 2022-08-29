@@ -13,6 +13,7 @@ import { checkAccessToken, getCookie } from "../../services/urls";
 import { useAppSelector, useAppDispatch} from "../../hooks";
 import { TBurger } from "../../services/reducers/constuctor";
 import { TIngredient } from "../../types/types";
+import { v4 as idv4 } from 'uuid';
 
 const BurgerConstructor = () => {
 	const dispatch = useAppDispatch(),
@@ -58,7 +59,8 @@ const BurgerConstructor = () => {
 		drop (item) {
 			dispatch({
 				type: ADD,
-				data: item
+				data: item,
+				uuid: idv4()
 			});
 			dispatch({
 				type: INCREASE,
