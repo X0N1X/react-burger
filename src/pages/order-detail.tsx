@@ -11,7 +11,7 @@ export const PageOrderDetail = ({isFeed}:{isFeed?:boolean}) => {
 
     useEffect(() => {
         if (isFeed) {
-            dispatch(WSStart(baseWsUrl + 'orders/all'));
+            dispatch(WSStart(baseWsUrl + '/orders/all'));
 
         } else {
             const accessToken = (getCookie('accessToken') as string).replace('Bearer ', '');
