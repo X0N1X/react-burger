@@ -22,11 +22,13 @@ const Modal: React.FC<IModal> = ({children, title, visible, onClickClose}) => {
 		  };
 
 	React.useEffect(() => {
-		document.addEventListener('keydown', closeByEsc);
-		return () => {
-			document.removeEventListener('keydown', closeByEsc);
+		if (visible) {
+			document.addEventListener('keydown', closeByEsc);
+			return () => {
+				document.removeEventListener('keydown', closeByEsc);
+			}
 		}
-	});
+	}, [visible]);
 
 	return visible ? ReactDOM.createPortal (
 		visible &&
