@@ -1,6 +1,7 @@
 import { setCookie, checkResponse, login as url} from "../urls";
 import { GET_SUCCESS } from "./user";
-import {TAppDispatch, TAppThunk} from "../store";
+import { TAppDispatch, TAppThunk } from "../store";
+import { TLoginForm } from "../reducers/login";
 
 export const REQUEST = 'LOGIN_REQUEST';
 export const SUCCESS = 'LOGIN_SUCCESS';
@@ -9,7 +10,7 @@ export const SET     = 'LOGIN_SET';
 
 export const setLogin = (field:string, value:string):TAction  => ({type: SET, field, value});
 
-export const login: TAppThunk = (form) => {
+export const login: TAppThunk = (form:TLoginForm) => {
 	return async (dispatch:TAppDispatch) => {
 		dispatch({type: REQUEST});
 		fetch(url, {

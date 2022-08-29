@@ -1,6 +1,7 @@
 import { setCookie, checkResponse, registration as url, fetchWithRefreshToken } from "../urls";
 import { TAppDispatch, TAppThunk } from "../store";
 import { GET_SUCCESS } from "./user";
+import { TRegForm } from "../reducers/registration";
 
 export const REQUEST = 'REGISTRATION_REQUEST';
 export const SUCCESS = 'REGISTRATION_SUCCESS';
@@ -9,7 +10,7 @@ export const SET     = "REGISTRATION_SET";
 
 export const setRegistration = (field:string, value:string):TAction => ({type: SET, field, value});
 
-export const registration: TAppThunk = (form) => {
+export const registration: TAppThunk = (form:TRegForm) => {
 	return async (dispatch:TAppDispatch) => {
 		dispatch({type: REQUEST});
 		fetchWithRefreshToken(url, {

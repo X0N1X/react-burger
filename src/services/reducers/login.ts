@@ -1,15 +1,17 @@
 import { REQUEST, SUCCESS, ERROR, SET } from "../actions/login";
 
+export type TLoginForm = {
+	password: string;
+	email:    string;
+}
+
 type TLogin = {
 	loading:  boolean;
 	hasError: boolean;
 	auth:     boolean;
 	name:     string;
 	email:    string;
-	form: {
-		password: string;
-		email:    string;
-	}
+	form:     TLoginForm
 }
 
 const initState:TLogin = {

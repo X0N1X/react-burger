@@ -1,20 +1,24 @@
 import { FORGOT_REQUEST, FORGOT_SUCCESS, FORGOT_ERROR, FORGOT_SET } from "../actions/password";
 import { RESET_REQUEST,  RESET_SUCCESS,  RESET_ERROR, RESET_SET }   from "../actions/password";
 
+export type TForgotForm = {
+	email: string;
+}
+
+export type TResetForm = {
+	password: string;
+	token:    string;
+}
+
 type TPassword = {
 	forgotLoading:  boolean;
 	forgotHasError: boolean;
 	forgotSuccess:  boolean;
-	forgotForm: {
-		email: string;
-	};
-	resetLoading:  boolean;
-	resetHasError: boolean;
-	resetSuccess:  boolean;
-	resetForm: {
-		password: string;
-		token:    string;
-	};
+	forgotForm:     TForgotForm;
+	resetLoading:   boolean;
+	resetHasError:  boolean;
+	resetSuccess:   boolean;
+	resetForm:      TResetForm;
 }
 
 const initState:TPassword = {

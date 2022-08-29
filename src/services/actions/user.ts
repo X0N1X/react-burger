@@ -1,5 +1,6 @@
 import { getCookie, deleteCookie, checkResponse, logout as logoutUrl, user as userUrl, fetchWithRefreshToken} from "../urls";
 import { TAppDispatch, TAppThunk } from "../store";
+import { TProfile } from "../reducers/user";
 
 export const GET_REQUEST = "USER_GET_REQUEST";
 export const GET_SUCCESS = "USER_GET_SUCCESS";
@@ -37,7 +38,7 @@ export const getUser: TAppThunk = () => {
     }
 };
 
-export const patchUser: TAppThunk = (profile) => {
+export const patchUser: TAppThunk = (profile:TProfile) => {
     return async (dispatch:TAppDispatch) => {
         dispatch({type: PATCH_REQUEST});
         fetchWithRefreshToken(userUrl, {

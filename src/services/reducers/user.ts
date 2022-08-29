@@ -1,12 +1,14 @@
 import {LOGOUT, SET, GET_REQUEST, GET_ERROR, GET_SUCCESS, PATCH_ERROR, PATCH_REQUEST, PATCH_SUCCESS} from "../actions/user";
 
+export type TProfile = {
+    name:     string;
+    email:    string;
+    password: string;
+}
+
 export interface IUser {
-    isAuth: boolean;
-    profile: {
-        name:     string;
-        email:    string;
-        password: string;
-    };
+    isAuth:  boolean;
+    profile: TProfile;
     info: {
         name:  string;
         email: string;

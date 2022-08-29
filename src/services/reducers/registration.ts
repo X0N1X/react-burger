@@ -1,13 +1,15 @@
 import { REQUEST, SUCCESS, ERROR, SET } from "../actions/registration";
 
+export type TRegForm = {
+	name:     string;
+	email:    string;
+	password: string;
+}
+
 type TRegistration = {
 	loading:  boolean;
 	hasError: boolean;
-	form: {
-		name:     string;
-		email:    string;
-		password: string;
-	}
+	form:     TRegForm;
 };
 
 const initState:TRegistration = {

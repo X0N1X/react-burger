@@ -1,5 +1,6 @@
 import { checkResponse, forgot as forgotUrl, reset as resetUrl } from "../urls";
-import {TAppDispatch, TAppThunk} from "../store";
+import { TAppDispatch, TAppThunk } from "../store";
+import { TForgotForm, TResetForm } from "../reducers/password";
 
 export const FORGOT_REQUEST = "PASSWORD_FORGOT_REQUEST";
 export const FORGOT_SUCCESS = "PASSWORD_FORGOT_SUCCESS";
@@ -14,7 +15,7 @@ export const RESET_SET     = "PASSWORD_RESET_SET";
 export const setPasswordForgot = (field:string, value:string):TAction => ({type: FORGOT_SET, field, value});
 export const setPasswordReset  = (field:string, value:string):TAction => ({type: RESET_SET,  field, value});
 
-export const passwordForgot: TAppThunk = (forgotForm) => {
+export const passwordForgot: TAppThunk = (forgotForm:TForgotForm) => {
 	return async (dispatch: TAppDispatch) => {
 		dispatch({
 			type: FORGOT_REQUEST
@@ -42,7 +43,7 @@ export const passwordForgot: TAppThunk = (forgotForm) => {
 	}
 };
 
-export const passwordReset: TAppThunk = (resetForm) => {
+export const passwordReset: TAppThunk = (resetForm:TResetForm) => {
 	return async (dispatch: TAppDispatch) => {
 		dispatch({type: RESET_REQUEST});
 		fetch(resetUrl, {
