@@ -1,4 +1,5 @@
 import {REQUEST, SUCCESS, ERROR, INCREASE, DECREASE } from '../actions/store'
+import { RESET } from '../actions/constructor'
 import { TGroup, TIngredient } from "../../types/types";
 
 export interface IStore {
@@ -110,6 +111,13 @@ export const store = (state = initState, action:TAction): IStore => {
 						}})
 				};
 			}
+		case RESET:
+			return {
+				...state,
+				store: state.store.map((group) => {
+					return {...group, children: group.children.map((item)=>{return {...item, used:0}})}
+				})
+			};
 		default:
 			return state;
 	}
