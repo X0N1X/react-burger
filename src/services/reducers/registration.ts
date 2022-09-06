@@ -12,7 +12,7 @@ type TRegistration = {
 	form:     TRegForm;
 };
 
-const initState:TRegistration = {
+export const initState:TRegistration = {
 	loading:  false,
 	hasError: false,
 	form: {

@@ -12,9 +12,9 @@ type TItemsList = {
 const ItemsList = ({ bun, ingredients }:TItemsList) => {
 
 	return (
-		<div className = {styles.list}>
+		<div className = {styles.list} data-test="current_burger">
 			{bun &&
-				<div className={styles.bun_container}>
+				<div className={styles.bun_container} data-test={bun._id} data-price={bun.price}>
 					<ConstructorElement
 						type      = "top"
 						isLocked  = {true}
@@ -25,12 +25,12 @@ const ItemsList = ({ bun, ingredients }:TItemsList) => {
 				</div>
 			}
 			{ingredients &&
-				<div className={styles.items}>
+				<div className={styles.items} data-test="current_ingredients">
 					{ingredients.map((item, index) => <Item key={item.uuid} item={item} index={index}/>)}
 				</div>
 			}
 			{bun &&
-				<div className={styles.bun_container}>
+				<div className={styles.bun_container} data-test={bun._id} data-price={bun.price}>
 					<ConstructorElement
 						type      = "bottom"
 						isLocked  = {true}

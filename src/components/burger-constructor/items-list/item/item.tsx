@@ -53,7 +53,12 @@ const Item = ({ item, index }:IItem) => {
 	};
 
 	return (
-		<div itemID={index.toString()} className={`${styles.item} ${ isDrag && styles.drag} ingredient`} draggable ref={dragDropRef}>
+		<div itemID={index.toString()}
+			 className={`${styles.item} ${ isDrag && styles.drag} ingredient`}
+			 draggable
+			 ref={dragDropRef}
+		     data-test={item._id}
+			 data-price={item.price}>
 			<div>
 				<DragIcon type = 'primary'/>
 			</div>

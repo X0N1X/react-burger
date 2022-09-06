@@ -5,7 +5,7 @@ type TState = {
 	group: string;
 }
 
-const initState:TState = {
+export const initState:TState = {
 	tab:   'constructor.ts',
 	group: 'bun'
 };

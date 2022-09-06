@@ -10,7 +10,7 @@ export type TCurrentBurger = {
 	currentBurger: TBurger
 }
 
-const initState:TCurrentBurger = {
+export const initState:TCurrentBurger = {
 	currentBurger: {
 		bun:         null,
 		ingredients: []
@@ -29,8 +29,7 @@ const move = (t:TIngredient[], i:number, y:number) => [
 	y<=i?t[i]:null,
 	...t.slice(y<=i?y:i+1,y<=i?i:y+1),
 	y>i?t[i]:null,
-	...t.slice(y<=i?i+1:y+1)
-].filter(k=>k!==null);
+	...t.slice(y<=i?i+1:y+1)].filter(k=>k!==null);
 
 export const burger = (state = initState, action:TAction) => {
 	switch (action.type) {

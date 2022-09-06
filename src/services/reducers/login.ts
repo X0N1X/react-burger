@@ -14,7 +14,7 @@ type TLogin = {
 	form:     TLoginForm
 }
 
-const initState:TLogin = {
+export const initState:TLogin = {
 	loading:  false,
 	hasError: false,
 	auth:     false,

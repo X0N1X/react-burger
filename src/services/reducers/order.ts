@@ -1,12 +1,12 @@
 import {REQUEST, SUCCESS, ERROR} from '../actions/order'
 
 type TCurrentOrder = {
-	number?: number;
-	loading: boolean;
+	number?:  number;
+	loading:  boolean;
 	hasError: boolean;
 }
 
-const initState:TCurrentOrder = {
+export const initState:TCurrentOrder = {
 	number:        0,
 	loading:       false,
 	hasError:      false

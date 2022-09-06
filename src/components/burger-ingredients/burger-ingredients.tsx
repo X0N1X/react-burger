@@ -50,7 +50,7 @@ const BurgerIngredients = () => {
 	}
 
 	return ( !loading ?
-		<div className={styles.panel}>
+		<div className={styles.panel} data-test='ingredients'>
 			<p className = {titleCls}>
 				Собирите бургер
 			</p>

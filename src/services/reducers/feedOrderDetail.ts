@@ -8,7 +8,7 @@ type TFeedOrder =  {
     isOpen:       boolean
 }
 
-const initState: TFeedOrder = {
+export const initState: TFeedOrder = {
     order:        null,
     isOpen:       false,
     orderRequest: false,
