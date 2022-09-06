@@ -1,3 +1,9 @@
+Ссылка на проект в облаке
+https://xonix.nomoredomains.sbs/
+
+Ссылка на роект в GitHub Pages
+https://x0n1x.github.io/react-burger/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
