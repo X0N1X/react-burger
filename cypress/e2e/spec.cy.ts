@@ -1,8 +1,10 @@
+import {baseTextUrl, ingredients } from "../../src/services/urls";
+
 // @ts-ignore
 describe('Проверка доступа меню', () => {
 
     it('Наличие пункта меню', () => {
-        cy.visit('http://localhost:3000');
+        cy.visit(baseTextUrl);
         cy.contains('Конструктор');
     });
 
@@ -13,8 +15,8 @@ describe('Проверка ингредиентов', () => {
     let price = 0;
 
     before(() => {
-        cy.visit('http://localhost:3000');
-        cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {fixture: "burger-ingredients.json"});
+        cy.visit(baseTextUrl);
+        cy.intercept("GET", ingredients, {fixture: "burger-ingredients.json"});
 
     });
 

@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-
+export const baseTextUrl  = 'http://localhost:3000';
 export const baseUrl      = 'https://norma.nomoreparties.space/api';
 export const baseWsUrl    = 'wss://norma.nomoreparties.space';
 export const ingredients  = baseUrl + '/ingredients';
