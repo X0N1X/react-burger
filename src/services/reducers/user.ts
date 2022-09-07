@@ -19,7 +19,7 @@ export interface IUser {
     patchHasError: boolean;
 }
 
-const initState: IUser = {
+export const initState: IUser = {
     isAuth: false,
     profile: {
         name:     '',

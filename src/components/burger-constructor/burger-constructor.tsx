@@ -71,7 +71,7 @@ const BurgerConstructor = () => {
 
 	return (
 		currentBurger && (currentBurger.bun || currentBurger.ingredients.length) ?
-			<div className={styles.panel} ref={dropTarget}>
+			<div className={styles.panel} ref={dropTarget} data-test='_constructor'>
 				<ItemsList
 					bun={currentBurger.bun as TIngredient}
 					ingredients={currentBurger.ingredients}
@@ -79,7 +79,7 @@ const BurgerConstructor = () => {
 
 					<div className={styles.total}>
 						<div className={styles.price}>
-							<p className={cls}>
+							<p className={cls} data-test="total-price">
 								{price.total}
 							</p>
 							<CurrencyIcon type="primary"/>
@@ -94,7 +94,7 @@ const BurgerConstructor = () => {
 				</Modal>
 			</div>
 		:
-			<div className={styles.panel} ref={dropTarget}>
+			<div className={styles.panel} ref={dropTarget} data-test='_constructor'>
 				Переместите сюда булку и ингредиетны
 			</div>
 	)

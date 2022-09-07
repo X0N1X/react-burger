@@ -9,7 +9,7 @@ export interface IStore {
 	hasError:   boolean;
 }
 
-const initState: IStore = {
+export const initState: IStore = {
 	store:       [],
 	raw:         [],
 	loading:    false,

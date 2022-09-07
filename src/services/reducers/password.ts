@@ -21,7 +21,7 @@ type TPassword = {
 	resetForm:      TResetForm;
 }
 
-const initState:TPassword = {
+export const initState:TPassword = {
 	forgotLoading:  false,
 	forgotHasError: false,
 	forgotSuccess:  false,

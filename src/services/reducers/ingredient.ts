@@ -1,12 +1,13 @@
 import { OPEN, CLOSE } from "../actions/ingredient";
+import { TIngredient } from "../../types/types";
 
 type TIngredientWindow = {
-	data:      object;
+	data:      TIngredient | {};
 	isVisible: boolean;
 }
 
-const initState: TIngredientWindow = {
-	data: {},
+export const initState: TIngredientWindow = {
+	data:      {},
 	isVisible: false
 };
 

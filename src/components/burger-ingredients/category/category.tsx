@@ -9,7 +9,7 @@ const Category = ({ group }: {group:TGroup}) => {
 
 	return (
 		<>
-			<span className = {`${styles.title} category`} id={group.name}>
+			<span className = {`${styles.title} category`} id={group.name} data-test='category'>
 					{group.text}
 			</span>
 			<ul className = {styles.list}>

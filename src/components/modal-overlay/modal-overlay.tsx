@@ -15,7 +15,7 @@ const ModalOverlay: React.FC<IModalOverlay> = ({onClick, children}) => {
     };
 
     return (
-        <div className = {styles.mask} onClick = {onClickOverlay}>
+        <div className = {styles.mask} onClick = {onClickOverlay} data-test="modal">
           {children}
         </div>
     );
